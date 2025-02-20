@@ -4,7 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="146cf23d-5ac4-4f6e-bb9a-5599ca3eca54" name="Changes" comment="" />
+    <list default="true" id="146cf23d-5ac4-4f6e-bb9a-5599ca3eca54" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Abogado.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Caso.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Cliente.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Comentario.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Cuenta.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Factura.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Orden.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/enums/EstadoCaso.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/enums/TipoCuenta.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/vo/CodigoValidacion.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/vo/Pago.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/ProyectoApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/ProyectoApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,6 +31,26 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -32,11 +69,36 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "C:/Users/ANAMARIA/OneDrive/Documentos/GitHub/FirmaDeAbogados_Back/src/main/java/org/example/Main.java",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="ProyectoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="FirmaDeAbogados_Back.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="Proyecto.ProyectoApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Proyecto.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.ProyectoApplication" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -45,9 +107,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1740015809372</updated>
-      <workItem from="1740015810100" duration="10000" />
+      <workItem from="1740015810100" duration="3648000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
