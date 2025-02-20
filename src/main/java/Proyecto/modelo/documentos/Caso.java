@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -22,6 +23,7 @@ public class Caso {
 
     private String nombreCaso;
     private String descripcionCaso;
+    private LocalDateTime fechaInicio;
     private List<ObjectId> idCliente;
     private List<ObjectId> idAbogados;
     private EstadoCaso estadoCaso;
