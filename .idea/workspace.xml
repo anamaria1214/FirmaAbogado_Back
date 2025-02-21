@@ -5,15 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="146cf23d-5ac4-4f6e-bb9a-5599ca3eca54" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/repositorios/AbogadoRepo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/repositorios/CasoRepo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/repositorios/ClienteRepo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/repositorios/ComentarioRepo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/repositorios/CuentaRepo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/repositorios/FacturaRepo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/repositorios/OrdenRepo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/dtos/InformacionCuentaDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/dtos/RegistroDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/servicios/implementaciones/CuentaServicioImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/servicios/interfaces/CuentaServicio.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Caso.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Caso.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Abogado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Abogado.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Cliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Cuenta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Cuenta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/enums/EstadoCaso.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/enums/EstadoCaso.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,9 +40,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
         <option value="Interface" />
+        <option value="Record" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -106,7 +107,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1740015809372</updated>
-      <workItem from="1740015810100" duration="4441000" />
+      <workItem from="1740015810100" duration="9588000" />
     </task>
     <servers />
   </component>

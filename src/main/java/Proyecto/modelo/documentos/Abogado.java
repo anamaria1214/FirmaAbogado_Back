@@ -1,6 +1,7 @@
 package Proyecto.modelo.documentos;
 
 import lombok.*;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -21,4 +22,5 @@ public class Abogado {
     private String nombre;
     private List<String> especializaciones;
     private String telefono;
+    private ObjectId idCuenta;
 }

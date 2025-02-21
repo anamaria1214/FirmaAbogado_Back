@@ -1,6 +1,7 @@
 package Proyecto.modelo.documentos;
 
 import lombok.*;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -19,4 +20,5 @@ public class Cliente {
     private String nombre;
     private String telefono;
     private String direccion;
+    private ObjectId idCuenta;
 }
