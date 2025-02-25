@@ -5,15 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="146cf23d-5ac4-4f6e-bb9a-5599ca3eca54" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/dtos/InformacionCuentaDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/dtos/RegistroDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/servicios/implementaciones/CuentaServicioImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/servicios/interfaces/CuentaServicio.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/config/AsyncConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/dtos/CambiarPasswordDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/dtos/EmailDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/dtos/InfoCasosDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Administrador.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/servicios/implementaciones/CasoServicioImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/servicios/implementaciones/EmailServicioImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/servicios/interfaces/CasoServicio.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/servicios/interfaces/EmailServicio.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Abogado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Abogado.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Cliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Cuenta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Cuenta.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/enums/EstadoCaso.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/enums/EstadoCaso.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/repositorios/CasoRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/repositorios/CasoRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/repositorios/ClienteRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/repositorios/ClienteRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/repositorios/CuentaRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/repositorios/CuentaRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/servicios/implementaciones/CuentaServicioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/servicios/implementaciones/CuentaServicioImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/servicios/interfaces/CuentaServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/servicios/interfaces/CuentaServicio.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,6 +79,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "C:/Users/ANAMARIA/OneDrive/Documentos/GitHub/FirmaDeAbogados_Back/src/main/java/org/example/Main.java",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -107,7 +116,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1740015809372</updated>
-      <workItem from="1740015810100" duration="9588000" />
+      <workItem from="1740015810100" duration="15805000" />
     </task>
     <servers />
   </component>

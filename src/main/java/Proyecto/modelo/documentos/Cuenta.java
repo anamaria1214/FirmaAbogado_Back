@@ -25,4 +25,5 @@ public class Cuenta {
     private TipoCuenta tipoCuenta;
     private LocalDateTime fechaCreacion;
     private CodigoValidacion codValidacionRegistro;
+    private CodigoValidacion codValidacionPassword;
 }
