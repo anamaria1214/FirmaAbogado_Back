@@ -5,23 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="146cf23d-5ac4-4f6e-bb9a-5599ca3eca54" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/config/AsyncConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/dtos/CambiarPasswordDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/dtos/EmailDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/dtos/InfoCasosDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Administrador.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/servicios/implementaciones/CasoServicioImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/servicios/implementaciones/EmailServicioImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/servicios/interfaces/CasoServicio.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/servicios/interfaces/EmailServicio.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/config/JWTUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/dtos/MensajeDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/dtos/TokenDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Cuenta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Cuenta.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/repositorios/CasoRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/repositorios/CasoRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/repositorios/ClienteRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/repositorios/ClienteRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/repositorios/CuentaRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/repositorios/CuentaRepo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/servicios/implementaciones/CuentaServicioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/servicios/implementaciones/CuentaServicioImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/servicios/interfaces/CuentaServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/servicios/interfaces/CuentaServicio.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,17 +39,17 @@
       <list>
         <option value="Enum" />
         <option value="Interface" />
-        <option value="Record" />
         <option value="Class" />
+        <option value="Record" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2tHjHMjYNhg0Z6LihaGLgAPAnYI" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -72,7 +61,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Ana",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -122,6 +111,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

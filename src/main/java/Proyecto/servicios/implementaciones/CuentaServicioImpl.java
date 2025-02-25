@@ -11,6 +11,7 @@ import Proyecto.modelo.vo.CodigoValidacion;
 import Proyecto.repositorios.CuentaRepo;
 import Proyecto.servicios.interfaces.CuentaServicio;
 import Proyecto.servicios.interfaces.EmailServicio;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
