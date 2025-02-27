@@ -1,26 +1,23 @@
-package Proyecto.modelo.documentos;
+package Proyecto.modelo.vo;
 
 import lombok.*;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Document("abogados")
-public class Abogado {
+public class Comentario {
 
-    @Id
-    @EqualsAndHashCode.Include
-    private String idAbogado;
+    private String idComentario;
 
-    private String nombre;
-    private List<String> especializaciones;
-    private String telefono;
+    private String asunto;
+    private String descripcion;
+    private LocalDateTime fecha;
     private ObjectId idCuenta;
 }

@@ -4,7 +4,6 @@ import Proyecto.dtos.CambiarPasswordDTO;
 import Proyecto.dtos.EmailDTO;
 import Proyecto.dtos.InformacionCuentaDTO;
 import Proyecto.dtos.RegistroDTO;
-import Proyecto.modelo.documentos.Abogado;
 import Proyecto.modelo.documentos.Cuenta;
 import Proyecto.modelo.enums.TipoCuenta;
 import Proyecto.modelo.vo.CodigoValidacion;
@@ -30,7 +29,7 @@ public class CuentaServicioImpl implements CuentaServicio {
 
     @Override
     public Cuenta getCuentaByEmail(String email) throws Exception {
-        return cuentaRepo.buscarEmail(email).orElseThrow(()->new Exception("La cuenta no existe"));
+        return cuentaRepo.findByEmail(email).orElseThrow(()->new Exception("La cuenta no existe"));
     }
 
     public String encriptarPassword(String password){
@@ -60,6 +59,7 @@ public class CuentaServicioImpl implements CuentaServicio {
     }
     @Override
     public void cambioPassword(CambiarPasswordDTO cambiarPassword) throws Exception {
+        System.out.println(cambiarPassword);
         Cuenta cUsuario = getCuentaByEmail(cambiarPassword.email());
         if(cUsuario==null){
             throw new Exception("Cuenta no encontrada");
@@ -95,8 +95,7 @@ public class CuentaServicioImpl implements CuentaServicio {
         cuentaRepo.save(cuenta);
 
         if(cuenta.getTipoCuenta().equals(TipoCuenta.ABOGADO)){
-            Abogado abogado= new Abogado();
-            //Debo seguir creando el abogado y el cliente
+
         }
     }
 

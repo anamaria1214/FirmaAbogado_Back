@@ -5,11 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="146cf23d-5ac4-4f6e-bb9a-5599ca3eca54" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/config/JWTUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/dtos/MensajeDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/dtos/TokenDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/controllers/PublicController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/dtos/ValidacionDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/exceptions/ExcepcionesGlobales.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/vo/Abono.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Abogado.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Administrador.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Caso.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Caso.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Cliente.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Comentario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/vo/Comentario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Cuenta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Cuenta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Factura.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Factura.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/documentos/Orden.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/enums/EstadoOrden.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/enums/EstadoFactura.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/enums/TipoCuenta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/modelo/enums/TipoCuenta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/repositorios/AbogadoRepo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/repositorios/CasoRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/repositorios/CasoRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/repositorios/ClienteRepo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/repositorios/ComentarioRepo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/repositorios/CuentaRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/repositorios/CuentaRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/repositorios/FacturaRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/repositorios/FacturaRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/repositorios/OrdenRepo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/servicios/implementaciones/CasoServicioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/servicios/implementaciones/CasoServicioImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/servicios/implementaciones/CuentaServicioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/servicios/implementaciones/CuentaServicioImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -56,25 +75,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Ana",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "C:/Users/ANAMARIA/OneDrive/Documentos/GitHub/FirmaDeAbogados_Back/src/main/java/org/example/Main.java",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/ANAMARIA/OneDrive/Documentos/GitHub/FirmaDeAbogados_Back/src/main/java/org/example/Main.java&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="Proyecto.modelo.documentos" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="Proyecto.exceptions" />
     </key>
   </component>
   <component name="RunManager">
@@ -106,6 +132,7 @@
       <option name="presentableId" value="Default" />
       <updated>1740015809372</updated>
       <workItem from="1740015810100" duration="15805000" />
+      <workItem from="1740511716934" duration="10610000" />
     </task>
     <servers />
   </component>

@@ -2,28 +2,28 @@ package Proyecto.servicios.implementaciones;
 
 import Proyecto.dtos.InfoCasosDTO;
 import Proyecto.modelo.documentos.Caso;
-import Proyecto.modelo.documentos.Cliente;
 import Proyecto.repositorios.CasoRepo;
-import Proyecto.repositorios.ClienteRepo;
+import Proyecto.repositorios.CuentaRepo;
 import Proyecto.servicios.interfaces.CasoServicio;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
+@Service
 public class CasoServicioImpl implements CasoServicio {
 
     private final CasoRepo casoRepo;
-    private final ClienteRepo clienteRepo;
+    private final CuentaRepo clienteRepo;
 
-    public CasoServicioImpl(CasoRepo casoRepo, ClienteRepo clienteRepo) {
+    public CasoServicioImpl(CasoRepo casoRepo, CuentaRepo clienteRepo) {
         this.casoRepo = casoRepo;
         this.clienteRepo = clienteRepo;
     }
 
     @Override
     public List<InfoCasosDTO> listarCasosClientes(String idCliente) throws Exception {
-        if(clienteRepo.buscarCliente(idCliente).isEmpty()){
+        if(clienteRepo.findById(idCliente).isEmpty()){
             throw new Exception("Cliente no existe");
         }
         List<InfoCasosDTO> respuesta= new ArrayList<>();

@@ -1,6 +1,7 @@
 package Proyecto.modelo.documentos;
 
 import Proyecto.modelo.enums.EstadoCaso;
+import Proyecto.modelo.vo.Comentario;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -27,4 +28,5 @@ public class Caso {
     private List<ObjectId> idCliente;
     private List<ObjectId> idAbogados;
     private EstadoCaso estadoCaso;
+    private List<Comentario> comentarios;
 }
