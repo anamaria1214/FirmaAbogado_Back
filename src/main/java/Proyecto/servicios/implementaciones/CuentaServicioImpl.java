@@ -1,9 +1,6 @@
 package Proyecto.servicios.implementaciones;
 
-import Proyecto.dtos.CambiarPasswordDTO;
-import Proyecto.dtos.EmailDTO;
-import Proyecto.dtos.InformacionCuentaDTO;
-import Proyecto.dtos.RegistroDTO;
+import Proyecto.dtos.*;
 import Proyecto.modelo.documentos.Cuenta;
 import Proyecto.modelo.enums.TipoCuenta;
 import Proyecto.modelo.vo.CodigoValidacion;
@@ -21,6 +18,9 @@ import java.time.LocalDateTime;
 public class CuentaServicioImpl implements CuentaServicio {
     private final CuentaRepo cuentaRepo;
     private final EmailServicio emailServicio;
+
+
+
 
     public CuentaServicioImpl(CuentaRepo cuentaRepo, EmailServicio emailServicio) {
         this.cuentaRepo = cuentaRepo;
@@ -80,27 +80,77 @@ public class CuentaServicioImpl implements CuentaServicio {
         }
     }
 
-    //No terminado
     @Override
-    public void crearCuenta(RegistroDTO infoCuenta) throws Exception {
-        Cuenta cuenta= new Cuenta();
-        cuenta.setEmail(infoCuenta.email());
-        cuenta.setPassword(infoCuenta.password());
-        if(infoCuenta.rol().equals("abogado")){
-            cuenta.setTipoCuenta(TipoCuenta.ABOGADO);
-        }else{
-            cuenta.setTipoCuenta(TipoCuenta.CLIENTE);
-        }
-        cuenta.setFechaCreacion(LocalDateTime.now());
+    public CuentaDto actualizarCuenta(CuentaDto cuentaDto) throws Exception {
+        // Buscar la cuenta por el email
+        Cuenta cuenta = cuentaRepo.findByEmail(cuentaDto.getEmail())
+                .orElseThrow(() -> new Exception("Cuenta no encontrada"));
+
+        // Actualizar los datos de la cuenta
+        cuenta.setNombre(cuentaDto.getNombre());
+        cuenta.setTelefono(cuentaDto.getTelefono());
+        cuenta.setDireccion(cuentaDto.getDireccion());
+
+        // Guardar los cambios en la base de datos
         cuentaRepo.save(cuenta);
 
-        if(cuenta.getTipoCuenta().equals(TipoCuenta.ABOGADO)){
-
-        }
+        // Retornar un nuevo CuentaDto con la información actualizada
+        return toDto(cuenta);
     }
+
 
     @Override
     public InformacionCuentaDTO obtenerInfoCuenta(String id) throws Exception {
         return null;
     }
+
+    @Override
+    public CuentaDto crearCuenta(CuentaDto cuentaDto) throws Exception {
+        // Convertir de DTO a entidad
+        Cuenta cuenta = toEntity(cuentaDto);
+
+        // Encriptar la contraseña antes de guardarla
+        cuenta.setPassword(encriptarPassword(cuentaDto.getPassword()));
+
+        // Guardar en la base de datos
+        Cuenta cuentaGuardada = cuentaRepo.save(cuenta);
+
+        // Retornar la cuenta creada como DTO
+        return toDto(cuentaGuardada);
+    }
+
+    private CuentaDto toDto(Cuenta cuenta) {
+        return new CuentaDto(
+                cuenta.getCedula(),
+                cuenta.getNombre(),
+                cuenta.getTelefono(),
+                cuenta.getEmail(),
+                cuenta.getDireccion(),
+        null,
+                cuenta.getTipoCuenta().name() // Convertimos el enum a String
+        );
+    }
+
+    private Cuenta toEntity(CuentaDto cuentaDto) {
+        Cuenta cuenta = new Cuenta();
+        cuenta.setCedula(cuentaDto.getCedula());
+        cuenta.setNombre(cuentaDto.getNombre());
+        cuenta.setTelefono(cuentaDto.getTelefono());
+        cuenta.setEmail(cuentaDto.getEmail());
+        cuenta.setPassword(cuentaDto.getPassword());
+        cuenta.setDireccion(cuentaDto.getDireccion());
+        cuenta.setFechaCreacion(LocalDateTime.now());
+
+        // Asignar tipo de cuenta basado en el DTO
+        if ("abogado".equalsIgnoreCase(cuentaDto.getRol())) {
+            cuenta.setTipoCuenta(TipoCuenta.ABOGADO);
+        } else if ("admin".equalsIgnoreCase(cuentaDto.getRol())) {
+            cuenta.setTipoCuenta(TipoCuenta.ADMIN);
+        } else {
+            cuenta.setTipoCuenta(TipoCuenta.CLIENTE);
+        }
+
+        return cuenta;
+    }
+
 }

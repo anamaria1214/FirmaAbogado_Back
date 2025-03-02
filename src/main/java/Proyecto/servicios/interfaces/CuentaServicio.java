@@ -1,6 +1,7 @@
 package Proyecto.servicios.interfaces;
 
 import Proyecto.dtos.CambiarPasswordDTO;
+import Proyecto.dtos.CuentaDto;
 import Proyecto.dtos.InformacionCuentaDTO;
 import Proyecto.dtos.RegistroDTO;
 import Proyecto.modelo.documentos.Cuenta;
@@ -13,7 +14,9 @@ public interface CuentaServicio {
 
     void cambioPassword(CambiarPasswordDTO cambiarPassword) throws Exception;
 
-    void crearCuenta(RegistroDTO infoCuenta) throws Exception;
+    CuentaDto actualizarCuenta (CuentaDto cuentaDto)throws Exception;
 
     InformacionCuentaDTO obtenerInfoCuenta(String id) throws Exception;
+
+    CuentaDto crearCuenta(CuentaDto cuentaDto) throws Exception;
 }

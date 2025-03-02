@@ -21,7 +21,7 @@ public class Cuenta {
     @Id
     @EqualsAndHashCode.Include
     private String idCuenta;
-
+    private String cedula;
     private List<String> especializaciones;
     private String nombre;
     private String telefono;
