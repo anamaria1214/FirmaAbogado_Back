@@ -24,14 +24,14 @@ public class EmailServicioImpl implements EmailServicio {
     public void enviarCorreo(EmailDTO emailDTO) throws Exception {
 
         Email email = EmailBuilder.startingBlank()
-                .from("unieventosq@gmail.com")
+                .from("anicu2314@gmail.com")
                 .to(emailDTO.destinatario())
                 .withSubject(emailDTO.asunto())
                 .withPlainText(emailDTO.cuerpo())
                 .buildEmail();
 
         try (Mailer mailer = MailerBuilder
-                .withSMTPServer("smtp.gmail.com", 587, "", "")
+                .withSMTPServer("smtp.gmail.com", 587, "anam.cuellarg@uqvirtual.edu.co", "wnmi prah aaxc avkz ")
                 .withTransportStrategy(TransportStrategy.SMTP_TLS)
                 .withDebugLogging(true)
                 .buildMailer()) {

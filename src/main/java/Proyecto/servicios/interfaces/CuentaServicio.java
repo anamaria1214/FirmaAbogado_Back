@@ -1,12 +1,11 @@
 package Proyecto.servicios.interfaces;
 
-import Proyecto.dtos.CambiarPasswordDTO;
-import Proyecto.dtos.CuentaDto;
-import Proyecto.dtos.InformacionCuentaDTO;
-import Proyecto.dtos.RegistroDTO;
+import Proyecto.dtos.*;
 import Proyecto.modelo.documentos.Cuenta;
 
 public interface CuentaServicio {
+
+    TokenDTO login(LoginDTO loginDTO) throws Exception;
 
     Cuenta getCuentaByEmail(String email) throws Exception;
 
