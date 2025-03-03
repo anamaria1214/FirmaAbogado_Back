@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -79,6 +80,20 @@ public class CuentaServicioImpl implements CuentaServicio {
             }
         }
     }
+
+    @Override
+    public void eliminarCuenta(CuentaDto cuentaDto) {
+
+            // Verificar si la cuenta existe antes de eliminarla
+            Optional<Cuenta> cuentaOptional = cuentaRepo.findByEmail(cuentaDto.getEmail());
+            if (cuentaOptional.isEmpty()) {
+                throw new RuntimeException("El email " + cuentaDto.getEmail() + " no se encuentra registrado.");
+            }
+
+            // Si existe, eliminar la cuenta
+            cuentaRepo.delete(cuentaOptional.get());
+        }
+
 
     @Override
     public CuentaDto actualizarCuenta(CuentaDto cuentaDto) throws Exception {

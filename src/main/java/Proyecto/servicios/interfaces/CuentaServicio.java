@@ -14,6 +14,7 @@ public interface CuentaServicio {
 
     void cambioPassword(CambiarPasswordDTO cambiarPassword) throws Exception;
 
+    void eliminarCuenta(CuentaDto cuentaDto);
     CuentaDto actualizarCuenta (CuentaDto cuentaDto)throws Exception;
 
     InformacionCuentaDTO obtenerInfoCuenta(String id) throws Exception;
