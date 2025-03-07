@@ -9,6 +9,8 @@ public interface CuentaServicio {
 
     Cuenta getCuentaByEmail(String email) throws Exception;
 
+    CuentaDto getCuentaById(String id) throws Exception;
+
     void enviarCodigoRecuperacion(String correo) throws Exception;
 
     void cambioPassword(CambiarPasswordDTO cambiarPassword) throws Exception;
