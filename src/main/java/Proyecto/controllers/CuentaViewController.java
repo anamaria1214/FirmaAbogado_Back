@@ -2,6 +2,7 @@ package Proyecto.controllers;
 
 
 import Proyecto.dtos.CuentaDto;
+import Proyecto.modelo.documentos.Cuenta;
 import Proyecto.servicios.interfaces.CuentaServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,5 +25,12 @@ public class CuentaViewController {
     @PutMapping("/actualizar" )
     public CuentaDto actualizarCuenta(@RequestBody CuentaDto cuentaDto) throws Exception {
         return cuentaServicio.actualizarCuenta(cuentaDto);
+    }
+
+    // Eliminar un admin por ID: DELETE /api/admin/{id}
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable String id) throws Exception {
+        CuentaDto clientDelete = cuentaServicio.getCuentaById(id);
+        cuentaServicio.eliminarCuenta(clientDelete);
     }
 }

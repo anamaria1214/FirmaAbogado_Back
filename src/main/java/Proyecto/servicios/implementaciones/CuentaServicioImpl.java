@@ -33,6 +33,19 @@ public class CuentaServicioImpl implements CuentaServicio {
         return cuentaRepo.findByEmail(email).orElseThrow(()->new Exception("La cuenta no existe"));
     }
 
+    @Override
+    public CuentaDto getCuentaById(String id) throws Exception {
+        // Buscar la cuenta por su ID en la base de datos
+        Optional<Cuenta> cuentaOptional = cuentaRepo.findByCedula(id);
+
+        // Verificar si la cuenta existe
+        if (cuentaOptional.isPresent()) {
+            return toDto(cuentaOptional.get());  // Convertir la entidad a DTO y retornar
+        } else {
+            throw new RuntimeException("Cuenta no encontrada con cédula: " + id);
+        }
+    }
+
     public String encriptarPassword(String password){
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         return passwordEncoder.encode(password);
@@ -50,6 +63,7 @@ public class CuentaServicioImpl implements CuentaServicio {
         }
         return resul;
     }
+
     @Override
     public void enviarCodigoRecuperacion(String correo) throws Exception{
         Cuenta cUsuario = getCuentaByEmail(correo);
@@ -85,9 +99,9 @@ public class CuentaServicioImpl implements CuentaServicio {
     public void eliminarCuenta(CuentaDto cuentaDto) {
 
             // Verificar si la cuenta existe antes de eliminarla
-            Optional<Cuenta> cuentaOptional = cuentaRepo.findByEmail(cuentaDto.getEmail());
+            Optional<Cuenta> cuentaOptional = cuentaRepo.findByCedula(cuentaDto.getCedula());
             if (cuentaOptional.isEmpty()) {
-                throw new RuntimeException("El email " + cuentaDto.getEmail() + " no se encuentra registrado.");
+                throw new RuntimeException("La cedula " + cuentaDto.getCedula() + " no se encuentra registrada.");
             }
 
             // Si existe, eliminar la cuenta
