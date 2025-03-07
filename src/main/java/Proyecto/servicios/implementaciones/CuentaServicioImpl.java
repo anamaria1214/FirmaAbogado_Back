@@ -83,6 +83,9 @@ public class CuentaServicioImpl implements CuentaServicio {
         if(cUsuario==null){
             throw new Exception("Cuenta no encontrada");
         }
+        if(!cambiarPassword.passwordNueva().equals(cambiarPassword.repetirContraseña())){
+            throw new Exception("Las contraseñan no coinciden");
+        }
         CodigoValidacion codigoValidacion= cUsuario.getCodValidacionPassword();
         if(codigoValidacion!= null){
             String codigo= codigoValidacion.getCodigo();
