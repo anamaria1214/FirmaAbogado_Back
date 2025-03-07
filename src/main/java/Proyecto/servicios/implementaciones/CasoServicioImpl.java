@@ -21,6 +21,7 @@ public class CasoServicioImpl implements CasoServicio {
         this.clienteRepo = clienteRepo;
     }
 
+    //Método para mostrar todos los casos que pertenecen a un cliente
     @Override
     public List<InfoCasosDTO> listarCasosClientes(String idCliente) throws Exception {
         if(clienteRepo.findById(idCliente).isEmpty()){

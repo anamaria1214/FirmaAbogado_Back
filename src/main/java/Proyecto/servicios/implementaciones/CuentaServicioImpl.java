@@ -1,5 +1,6 @@
 package Proyecto.servicios.implementaciones;
 
+import Proyecto.config.JWTUtils;
 import Proyecto.dtos.*;
 import Proyecto.modelo.documentos.Cuenta;
 import Proyecto.modelo.enums.TipoCuenta;
@@ -12,20 +13,37 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.Optional;
-
 @Service
 @Transactional
 public class CuentaServicioImpl implements CuentaServicio {
     private final CuentaRepo cuentaRepo;
     private final EmailServicio emailServicio;
+    private final JWTUtils jwtUtils;
 
-
-
-
-    public CuentaServicioImpl(CuentaRepo cuentaRepo, EmailServicio emailServicio) {
+    public CuentaServicioImpl(CuentaRepo cuentaRepo, EmailServicio emailServicio, JWTUtils jwtUtils) {
         this.cuentaRepo = cuentaRepo;
         this.emailServicio = emailServicio;
+        this.jwtUtils = jwtUtils;
+    }
+
+    private Map<String, Object> construirClaims(Cuenta cuenta) {
+        return Map.of(
+                "rol", cuenta.getTipoCuenta(),
+                "nombre", cuenta.getEmail(),
+                "id", cuenta.getIdCuenta()
+        );
+    }
+    @Override
+    public TokenDTO login(LoginDTO loginDTO) throws Exception {
+        Cuenta cuenta = getCuentaByEmail(loginDTO.email());
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        if(!passwordEncoder.matches(loginDTO.password(), cuenta.getPassword()) ) {
+            throw new Exception("La contraseña es incorrecta");
+        }
+        Map<String, Object> map = construirClaims(cuenta);
+        return new TokenDTO(jwtUtils.generarToken(cuenta.getEmail(), map) );
     }
 
     @Override
