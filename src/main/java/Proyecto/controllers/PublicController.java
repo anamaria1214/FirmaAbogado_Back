@@ -17,6 +17,12 @@ public class PublicController {
 
     private final CuentaServicio cuentaServicio;
 
+    @PostMapping("/enviarCodigoRecuperacion/{email}")
+    public ResponseEntity<MensajeDTO<String>> enviarCodigoRecuperacion(@PathVariable String email) throws Exception {
+        cuentaServicio.enviarCodigoRecuperacion(email);
+        return ResponseEntity.ok(new MensajeDTO<>(false, "Correo enviado exitosamente"));
+    }
+
     @PostMapping("/login")
     public ResponseEntity<MensajeDTO<TokenDTO>> login(@Valid @RequestBody LoginDTO loginDTO) throws Exception {
         TokenDTO tokenDTO= cuentaServicio.login(loginDTO);
