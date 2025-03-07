@@ -19,6 +19,7 @@ import java.util.List;
 public class CuentaViewController {
     @Autowired
     private CuentaServicio cuentaServicio;
+    @Autowired
     private CasoServicio casoServicio;
 
 

@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="146cf23d-5ac4-4f6e-bb9a-5599ca3eca54" name="Changes" comment="Crear cuenta, actualizar cuenta funcionando">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/controllers/CuentaViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/controllers/CuentaViewController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,7 +140,7 @@
       <workItem from="1741011364763" duration="1476000" />
       <workItem from="1741182369378" duration="139000" />
       <workItem from="1741300457279" duration="1512000" />
-      <workItem from="1741366930180" duration="1419000" />
+      <workItem from="1741366930180" duration="3416000" />
     </task>
     <task id="LOCAL-00001" summary="Crear cuenta, actualizar cuenta funcionando">
       <option name="closed" value="true" />
