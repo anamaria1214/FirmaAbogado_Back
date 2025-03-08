@@ -12,8 +12,7 @@ RUN chmod +x gradlew
 RUN ./gradlew clean bootJar
 
 # Etapa de empaquetado
-FROM openjdk:17
-WORKDIR /app
+FROM gradle:8.2-jdk17 AS build
 
 # Copiar el archivo JAR generado
 COPY --from=build /home/gradle/project/build/libs/*.jar app.jar
