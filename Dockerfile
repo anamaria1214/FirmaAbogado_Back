@@ -1,24 +1,18 @@
-# Etapa de construcción
+#
+# Build stage
+#
 FROM gradle:latest AS build
-WORKDIR /home/gradle/project
+COPY --chown=gradle:gradle . /home/gradle/src
+WORKDIR /home/gradle/src
+RUN gradle clean
+RUN gradle bootJar
 
-# Copiar todo el proyecto, no solo src/
-COPY --chown=gradle:gradle . .
 
-# Dar permisos de ejecución a gradlew
-RUN chmod +x gradlew
-
-# Ejecutar construcción con el wrapper de Gradle
-RUN ./gradlew clean bootJar
-
-# Etapa de empaquetado
-FROM gradle:8.2-jdk17 AS build
-
-# Copiar el archivo JAR generado
-COPY --from=build /home/gradle/project/build/libs/*.jar app.jar
-
-# Exponer el puerto (Render establece el puerto automáticamente)
-EXPOSE 8080
-
-# Ejecutar la aplicación
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+#
+# Package stage
+#
+FROM openjdk:17
+ARG JAR_FILE=build/libs/*.jar
+COPY --from=build /home/gradle/src/build/libs/*.jar app.jar
+EXPOSE ${PORT}
+ENTRYPOINT ["java","-jar","/app.jar"]
