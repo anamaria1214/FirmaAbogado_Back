@@ -156,6 +156,10 @@ public class CuentaServicioImpl implements CuentaServicio {
 
     @Override
     public CuentaDto crearCuenta(CuentaDto cuentaDto) throws Exception {
+
+        if(cuentaRepo.findByEmail(cuentaDto.getEmail()).isPresent()){
+            throw new Exception("Ya existe una cuenta con este email");
+        }
         // Convertir de DTO a entidad
         Cuenta cuenta = toEntity(cuentaDto);
 
