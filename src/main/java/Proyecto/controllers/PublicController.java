@@ -4,6 +4,7 @@ import Proyecto.dtos.CambiarPasswordDTO;
 import Proyecto.dtos.LoginDTO;
 import Proyecto.dtos.MensajeDTO;
 import Proyecto.dtos.TokenDTO;
+import Proyecto.modelo.documentos.Cuenta;
 import Proyecto.servicios.interfaces.CuentaServicio;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +35,12 @@ public class PublicController {
     public ResponseEntity<MensajeDTO<String>> cambioPassword(@Valid @RequestBody CambiarPasswordDTO cambiarPassword) throws Exception {
         cuentaServicio.cambioPassword(cambiarPassword);
         return ResponseEntity.ok(new MensajeDTO<>(false, "Se cambio la contraseña exitosamente"));
+    }
+
+    @GetMapping("/findbyemail/{email}")
+    public ResponseEntity<MensajeDTO<Cuenta>> findbyemail(@PathVariable String email) throws Exception {
+        Cuenta cuenta= cuentaServicio.getCuentaByEmail(email);
+        return ResponseEntity.ok(new MensajeDTO<>(false, cuenta));
     }
 
 }

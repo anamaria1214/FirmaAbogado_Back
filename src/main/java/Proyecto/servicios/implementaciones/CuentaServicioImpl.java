@@ -87,7 +87,7 @@ public class CuentaServicioImpl implements CuentaServicio {
         Cuenta cUsuario = getCuentaByEmail(correo);
         String codigoValidacion= generarCodigoValidacion();
         cUsuario.setCodValidacionPassword(new CodigoValidacion(LocalDateTime.now(), codigoValidacion));
-        emailServicio.enviarCorreo( new EmailDTO("Código de validación", "El código de validación es: "+codigoValidacion+". Este código tiene una duración de 15 minutos, después de este tiempo, no será valido", correo) );
+        emailServicio.enviarCorreo(new EmailDTO("Código de validación", "El código de validación es: "+codigoValidacion+". Este código tiene una duración de 15 minutos, después de este tiempo, no será valido", correo) );
         cuentaRepo.save(cUsuario);
     }
     @Override
