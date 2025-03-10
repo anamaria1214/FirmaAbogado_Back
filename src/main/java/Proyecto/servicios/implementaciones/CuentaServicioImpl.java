@@ -35,6 +35,8 @@ public class CuentaServicioImpl implements CuentaServicio {
                 "id", cuenta.getIdCuenta()
         );
     }
+
+    //Método para iniciar sesión
     @Override
     public TokenDTO login(LoginDTO loginDTO) throws Exception {
         Cuenta cuenta = getCuentaByEmail(loginDTO.email());
@@ -46,11 +48,13 @@ public class CuentaServicioImpl implements CuentaServicio {
         return new TokenDTO(jwtUtils.generarToken(cuenta.getEmail(), map) );
     }
 
+    //Método para obtener una cuenta dado el email
     @Override
     public Cuenta getCuentaByEmail(String email) throws Exception {
         return cuentaRepo.findByEmail(email).orElseThrow(()->new Exception("La cuenta no existe"));
     }
 
+    //Método para obtener una cuenta dado el id de la cuenta
     @Override
     public CuentaDto getCuentaById(String id) throws Exception {
         // Buscar la cuenta por su ID en la base de datos
@@ -64,11 +68,13 @@ public class CuentaServicioImpl implements CuentaServicio {
         }
     }
 
+    //Método para encriptar la contraseña
     public String encriptarPassword(String password){
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         return passwordEncoder.encode(password);
     }
 
+    //Genera un código aleatorio para recuperar contraseña
     private String generarCodigoValidacion(){
 
         String cadena ="ABCDEFGHIJKMNÑOPQRSTUVWXYZ1234567890";
@@ -82,6 +88,7 @@ public class CuentaServicioImpl implements CuentaServicio {
         return resul;
     }
 
+    //Envia el código al correo del usuario
     @Override
     public void enviarCodigoRecuperacion(String correo) throws Exception{
         Cuenta cUsuario = getCuentaByEmail(correo);
@@ -90,6 +97,7 @@ public class CuentaServicioImpl implements CuentaServicio {
         emailServicio.enviarCorreo(new EmailDTO("Código de validación", "El código de validación es: "+codigoValidacion+". Este código tiene una duración de 15 minutos, después de este tiempo, no será valido", correo) );
         cuentaRepo.save(cUsuario);
     }
+    //Cambia la contraseña del usuario
     @Override
     public void cambioPassword(CambiarPasswordDTO cambiarPassword) throws Exception {
         System.out.println(cambiarPassword);
@@ -116,6 +124,7 @@ public class CuentaServicioImpl implements CuentaServicio {
         }
     }
 
+    //Elimina la cuenta del usuario
     @Override
     public void eliminarCuenta(CuentaDto cuentaDto) {
 
@@ -129,7 +138,7 @@ public class CuentaServicioImpl implements CuentaServicio {
             cuentaRepo.delete(cuentaOptional.get());
         }
 
-
+    //Actualiza los datos del usuario
     @Override
     public CuentaDto actualizarCuenta(CuentaDto cuentaDto) throws Exception {
         // Buscar la cuenta por el email
@@ -147,13 +156,7 @@ public class CuentaServicioImpl implements CuentaServicio {
         // Retornar un nuevo CuentaDto con la información actualizada
         return toDto(cuenta);
     }
-
-
-    @Override
-    public InformacionCuentaDTO obtenerInfoCuenta(String id) throws Exception {
-        return null;
-    }
-
+    //Crea una cuenta al usuario
     @Override
     public CuentaDto crearCuenta(CuentaDto cuentaDto) throws Exception {
 
@@ -172,7 +175,13 @@ public class CuentaServicioImpl implements CuentaServicio {
         // Retornar la cuenta creada como DTO
         return toDto(cuentaGuardada);
     }
+    @Override
+    public InformacionCuentaDTO obtenerInfoCuenta(String id) throws Exception {
+        return null;
+    }
 
+
+    //Convierte una cuenta a un dto de cuenta
     private CuentaDto toDto(Cuenta cuenta) {
         return new CuentaDto(
                 cuenta.getCedula(),
@@ -185,6 +194,7 @@ public class CuentaServicioImpl implements CuentaServicio {
         );
     }
 
+    //Convierte de DTO a Entidad
     private Cuenta toEntity(CuentaDto cuentaDto) {
         Cuenta cuenta = new Cuenta();
         cuenta.setCedula(cuentaDto.getCedula());

@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailServicioImpl implements EmailServicio {
 
+    //Enviar el correo al usuario
     @Override
     @Async
     public void enviarCorreo(EmailDTO emailDTO) throws Exception {
