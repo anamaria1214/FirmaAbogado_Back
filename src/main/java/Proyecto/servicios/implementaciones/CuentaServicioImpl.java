@@ -37,6 +37,13 @@ public class CuentaServicioImpl implements CuentaServicio {
     }
 
     //Método para iniciar sesión
+
+    /**
+     *
+     * @param loginDTO
+     * @return
+     * @throws Exception
+     */
     @Override
     public TokenDTO login(LoginDTO loginDTO) throws Exception {
         Cuenta cuenta = getCuentaByEmail(loginDTO.email());
