@@ -25,8 +25,8 @@ public class Caso {
     private String nombreCaso;
     private String descripcionCaso;
     private LocalDateTime fechaInicio;
-    private List<ObjectId> idCliente;
-    private List<ObjectId> idAbogados;
+    private List<String> idCliente;
+    private List<String> idAbogados;
     private EstadoCaso estadoCaso;
     private List<Comentario> comentarios;
 }

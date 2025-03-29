@@ -182,6 +182,12 @@ public class CuentaServicioImpl implements CuentaServicio {
         // Retornar la cuenta creada como DTO
         return toDto(cuentaGuardada);
     }
+
+    @Override
+    public Cuenta getCuentaByCedula(String cedula) throws Exception {
+        return cuentaRepo.findByEmail(cedula).orElseThrow(()->new Exception("La cuenta no existe"));
+    }
+
     @Override
     public InformacionCuentaDTO obtenerInfoCuenta(String id) throws Exception {
         return null;

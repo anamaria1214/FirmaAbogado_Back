@@ -21,4 +21,6 @@ public interface CuentaServicio {
     InformacionCuentaDTO obtenerInfoCuenta(String id) throws Exception;
 
     CuentaDto crearCuenta(CuentaDto cuentaDto) throws Exception;
+
+    Cuenta getCuentaByCedula(String cedula) throws Exception;
 }

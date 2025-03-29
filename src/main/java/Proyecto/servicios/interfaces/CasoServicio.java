@@ -8,7 +8,7 @@ public interface CasoServicio {
 
     List<InfoCasosDTO> listarCasosClientes(String idCliente) throws Exception;
 
-    void crearCaso(InfoCasosDTO infoCasos) throws Exception;
+    void crearCaso(CrearCasoDTO CrearCasoDTO) throws Exception;
 
     void actualizarCaSo(ActualizarCasoDTO actCaso) throws Exception;
 
