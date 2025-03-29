@@ -1,6 +1,6 @@
 package Proyecto.servicios.implementaciones;
 
-import Proyecto.dtos.InfoCasosDTO;
+import Proyecto.dtos.*;
 import Proyecto.modelo.documentos.Caso;
 import Proyecto.repositorios.CasoRepo;
 import Proyecto.repositorios.CuentaRepo;
@@ -36,5 +36,35 @@ public class CasoServicioImpl implements CasoServicio {
                     caso.getEstadoCaso().name()));
         }
         return respuesta;
+    }
+
+    @Override
+    public void crearCaso(InfoCasosDTO infoCasos) throws Exception {
+
+    }
+
+    @Override
+    public void actualizarCaSo(ActualizarCasoDTO actCaso) throws Exception {
+
+    }
+
+    @Override
+    public void cambiarEstado(CambiarEstadoDTO cambiarEstado) throws Exception {
+
+    }
+
+    @Override
+    public void subirDocumentos(SubirDocumentosDTO subirDocumentosDTO) throws Exception {
+
+    }
+
+    @Override
+    public void notificarCambioEstado(NotificarCambioDTO notificarCambioDTO) throws Exception {
+
+    }
+
+    @Override
+    public void comentarCaso(ComentarCasoDTO comentarCasoDTO) throws Exception {
+
     }
 }
