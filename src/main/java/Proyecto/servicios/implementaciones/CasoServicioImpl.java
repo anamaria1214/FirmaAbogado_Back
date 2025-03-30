@@ -7,6 +7,7 @@ import Proyecto.modelo.enums.EstadoCaso;
 import Proyecto.repositorios.CasoRepo;
 import Proyecto.repositorios.CuentaRepo;
 import Proyecto.servicios.interfaces.CasoServicio;
+import Proyecto.servicios.interfaces.FirebaseStorageService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,10 +19,12 @@ public class CasoServicioImpl implements CasoServicio {
 
     private final CasoRepo casoRepo;
     private final CuentaRepo clienteRepo;
+    private final FirebaseStorageService firebaseStorageService;
 
-    public CasoServicioImpl(CasoRepo casoRepo, CuentaRepo clienteRepo) {
+    public CasoServicioImpl(CasoRepo casoRepo, CuentaRepo clienteRepo, FirebaseStorageService firebaseStorageService) {
         this.casoRepo = casoRepo;
         this.clienteRepo = clienteRepo;
+        this.firebaseStorageService = firebaseStorageService;
     }
 
     /**
@@ -104,7 +107,15 @@ public class CasoServicioImpl implements CasoServicio {
 
     @Override
     public void subirDocumentos(SubirDocumentosDTO subirDocumentosDTO) throws Exception {
+        Optional<Caso> casoOpt = casoRepo.findById(subirDocumentosDTO.idCaso());
+        if (casoOpt.isEmpty()) {
+            throw new Exception("Caso no encontrado.");
+        }
+        String urlArchivo = firebaseStorageService.subirArchivo(subirDocumentosDTO.archivo());
 
+        Caso caso = casoOpt.get();
+        caso.getDocumentos().add(urlArchivo);
+        casoRepo.save(caso);
     }
 
     @Override

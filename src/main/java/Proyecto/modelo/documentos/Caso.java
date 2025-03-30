@@ -29,4 +29,5 @@ public class Caso {
     private List<String> idAbogados;
     private EstadoCaso estadoCaso;
     private List<Comentario> comentarios;
+    private List<String> documentos;
 }
