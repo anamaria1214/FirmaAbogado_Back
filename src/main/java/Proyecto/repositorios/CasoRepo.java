@@ -12,5 +12,8 @@ public interface CasoRepo extends MongoRepository<Caso, String> {
 
     @Query("{idCliente:  ?0}")
     List<Caso> buscarCasosPorClientes(String idCliente);
+
+    @Query("{ 'idAbogados': ?0 }")
+    List<Caso> buscarCasosPorAbogado(String idAbogado);
 }
 

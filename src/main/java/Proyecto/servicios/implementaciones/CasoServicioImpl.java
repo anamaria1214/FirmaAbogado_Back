@@ -4,10 +4,12 @@ import Proyecto.dtos.*;
 import Proyecto.modelo.documentos.Caso;
 import Proyecto.modelo.documentos.Cuenta;
 import Proyecto.modelo.enums.EstadoCaso;
+import Proyecto.modelo.vo.Comentario;
 import Proyecto.repositorios.CasoRepo;
 import Proyecto.repositorios.CuentaRepo;
 import Proyecto.servicios.interfaces.CasoServicio;
 import Proyecto.servicios.interfaces.FirebaseStorageService;
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -49,12 +51,32 @@ public class CasoServicioImpl implements CasoServicio {
         return respuesta;
     }
 
+    /**
+     * Lista los casos en los que un abogado específico está involucrado.
+     *
+     * @param idAbogado ID del abogado cuyos casos se quieren listar.
+     * @return Lista de InfoCasosDTO con la información de los casos asociados al abogado.
+     * @throws Exception Si ocurre algún error durante la consulta.
+     */
+    @Override
+    public List<InfoCasosDTO> listarCasosAbogados(String idAbogado) throws Exception {
+        List<InfoCasosDTO> infoCasos= new ArrayList<>();
+        List<Caso> casos= casoRepo.buscarCasosPorAbogado(idAbogado);
+        for(Caso caso: casos){
+            infoCasos.add(new InfoCasosDTO(caso.getNombreCaso(),
+                    caso.getDescripcionCaso(),
+                    caso.getFechaInicio(),
+                    caso.getEstadoCaso().name()));
+        }
+        return infoCasos;
+    }
 
-/**
- * Crea un nuevo caso legal en el sistema con la información proporcionada.
- * @param crearCasoDTO Objeto DTO con la información del caso a crear.
- * @throws Exception Si los datos proporcionados son inválidos o si los clientes/abogados no existen.
- */
+
+    /**
+     * Crea un nuevo caso legal en el sistema con la información proporcionada.
+     * @param crearCasoDTO Objeto DTO con la información del caso a crear.
+     * @throws Exception Si los datos proporcionados son inválidos o si los clientes/abogados no existen.
+     */
     @Override
     public void crearCaso(CrearCasoDTO crearCasoDTO) throws Exception {
         Caso caso= new Caso();
@@ -125,6 +147,20 @@ public class CasoServicioImpl implements CasoServicio {
 
     @Override
     public void comentarCaso(ComentarCasoDTO comentarCasoDTO) throws Exception {
+        Optional<Caso> casoOpt = casoRepo.findById(comentarCasoDTO.idCaso());
+        if (casoOpt.isEmpty()) {
+            throw new Exception("Caso no encontrado.");
+        }
 
+        Caso caso = casoOpt.get();
+
+        Comentario comentario= new Comentario(new ObjectId().toHexString(),
+                comentarCasoDTO.asunto(),
+                comentarCasoDTO.descripcion(),
+                comentarCasoDTO.fecha(),
+                comentarCasoDTO.idCuenta());
+
+        caso.getComentarios().add(comentario);
+        casoRepo.save(caso);
     }
 }

@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Comentario {
@@ -19,5 +20,5 @@ public class Comentario {
     private String asunto;
     private String descripcion;
     private LocalDateTime fecha;
-    private ObjectId idCuenta;
+    private String idCuenta;
 }
