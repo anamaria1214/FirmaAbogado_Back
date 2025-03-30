@@ -1,9 +1,6 @@
 package Proyecto.controllers;
 
-import Proyecto.dtos.CrearCasoDTO;
-import Proyecto.dtos.InfoCasosDTO;
-import Proyecto.dtos.MensajeDTO;
-import Proyecto.dtos.SubirDocumentosDTO;
+import Proyecto.dtos.*;
 import Proyecto.modelo.documentos.Caso;
 import Proyecto.servicios.implementaciones.FirebaseStorageServiceImpl;
 import Proyecto.servicios.interfaces.CasoServicio;
@@ -35,9 +32,24 @@ public class CasoController {
 
     }
 
-    @PostMapping("/{idCaso}/subir-documento")
+    @PostMapping("/subirDocumento")
     public ResponseEntity<?> subirDocumento(@RequestBody SubirDocumentosDTO subirDocumentosDTO) throws Exception {
         casoServicio.subirDocumentos(subirDocumentosDTO);
         return ResponseEntity.ok(new MensajeDTO<>(false,"Documento subido correctamente"));
     }
+
+    @GetMapping("/listarCasosAbogado/{id}")
+    public ResponseEntity<MensajeDTO<List<InfoCasosDTO>>> listarCasosAbogado(@PathVariable("id")String idAbogado) throws Exception {
+        List<InfoCasosDTO> casosAbogados= casoServicio.listarCasosAbogados(idAbogado);
+        return ResponseEntity.ok(new MensajeDTO<>(false,casosAbogados));
+
+    }
+
+    @PostMapping("/comentarCaso")
+    public ResponseEntity<MensajeDTO<String>> listarCasosAbogado(@RequestBody ComentarCasoDTO comentarCasoDTO) throws Exception {
+        casoServicio.comentarCaso(comentarCasoDTO);
+        return ResponseEntity.ok(new MensajeDTO<>(false,"Caso comentado correctamente"));
+
+    }
+
 }
