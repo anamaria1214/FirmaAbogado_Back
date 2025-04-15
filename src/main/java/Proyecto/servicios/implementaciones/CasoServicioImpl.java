@@ -8,6 +8,7 @@ import Proyecto.modelo.vo.Comentario;
 import Proyecto.repositorios.CasoRepo;
 import Proyecto.repositorios.CuentaRepo;
 import Proyecto.servicios.interfaces.CasoServicio;
+import Proyecto.servicios.interfaces.EmailServicio;
 import Proyecto.servicios.interfaces.FirebaseStorageService;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
@@ -22,11 +23,13 @@ public class CasoServicioImpl implements CasoServicio {
     private final CasoRepo casoRepo;
     private final CuentaRepo clienteRepo;
     private final FirebaseStorageService firebaseStorageService;
+    private final EmailServicio emailServicio;
 
-    public CasoServicioImpl(CasoRepo casoRepo, CuentaRepo clienteRepo, FirebaseStorageService firebaseStorageService) {
+    public CasoServicioImpl(CasoRepo casoRepo, CuentaRepo clienteRepo, FirebaseStorageService firebaseStorageService, EmailServicio emailServicio) {
         this.casoRepo = casoRepo;
         this.clienteRepo = clienteRepo;
         this.firebaseStorageService = firebaseStorageService;
+        this.emailServicio = emailServicio;
     }
 
     /**
@@ -92,6 +95,7 @@ public class CasoServicioImpl implements CasoServicio {
         }else{
             throw new Exception("El estado indicado no es valido");
         }
+
         List<String> cedulasClientes= new ArrayList<>();
         for(int i=0; i<crearCasoDTO.clientes().size();i++){
             Optional<Cuenta> cuenta= clienteRepo.findByCedula(crearCasoDTO.clientes().get(i));
@@ -118,7 +122,7 @@ public class CasoServicioImpl implements CasoServicio {
     }
 
     @Override
-    public void actualizarCaSo(ActualizarCasoDTO actCaso) throws Exception {
+    public void actualizarCaso(ActualizarCasoDTO actCaso) throws Exception {
 
     }
 
@@ -142,6 +146,24 @@ public class CasoServicioImpl implements CasoServicio {
 
     @Override
     public void notificarCambioEstado(NotificarCambioDTO notificarCambioDTO) throws Exception {
+
+    }
+
+    @Override
+    public void enviarCorreoSobreCaso(CorreoCasoDTO correoCasoDTO) throws Exception {
+        Optional<Caso> casoOptional = casoRepo.findById(correoCasoDTO.idCaso());
+        if(casoOptional.isEmpty()){
+            throw new Exception("Caso no existente");
+        }
+        Caso caso = casoOptional.get();
+        for(int i=0;i<caso.getIdCliente().size();i++){
+            Optional<Cuenta> cuenta = clienteRepo.findByCedula(caso.getIdCliente().get(i));
+            if(cuenta.isEmpty()){
+                throw new Exception("Cliente no encontrado");
+            }
+            EmailDTO emailDTO= new EmailDTO(correoCasoDTO.asunto(), "Correo mandado acerca del caso "+caso.getNombreCaso()+ ": "+correoCasoDTO.cuerpo(), cuenta.get().getEmail());
+            emailServicio.enviarCorreo(emailDTO);
+        }
 
     }
 

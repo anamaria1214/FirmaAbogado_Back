@@ -12,13 +12,17 @@ public interface CasoServicio {
 
     void crearCaso(CrearCasoDTO CrearCasoDTO) throws Exception;
 
-    void actualizarCaSo(ActualizarCasoDTO actCaso) throws Exception;
+    void actualizarCaso(ActualizarCasoDTO actCaso) throws Exception;
 
     void cambiarEstado(CambiarEstadoDTO cambiarEstado) throws Exception;
 
-    void subirDocumentos(SubirDocumentosDTO subirDocumentosDTO) throws Exception;
-
     void notificarCambioEstado(NotificarCambioDTO notificarCambioDTO) throws Exception;
 
+    void enviarCorreoSobreCaso(CorreoCasoDTO correoCasoDTO) throws Exception;
+
+    void subirDocumentos(SubirDocumentosDTO subirDocumentosDTO) throws Exception;
+
     void comentarCaso(ComentarCasoDTO comentarCasoDTO) throws Exception;
+
+
 }

@@ -52,4 +52,10 @@ public class CasoController {
 
     }
 
+    @PostMapping("/enviarCorreoSobrecaso")
+    ResponseEntity<MensajeDTO<String>> enviarCorreoSobreCaso(@RequestBody CorreoCasoDTO correoCasoDTO) throws Exception {
+        casoServicio.enviarCorreoSobreCaso(correoCasoDTO);
+        return ResponseEntity.ok(new MensajeDTO<>(false,"Correo/s enviado/s correctamente"));
+    }
+
 }
