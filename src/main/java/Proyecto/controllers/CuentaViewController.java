@@ -31,7 +31,6 @@ public class CuentaViewController {
         return cuentaServicio.crearCuenta(cuentaDto);
     }
 
-
     @PutMapping("/actualizar" )
     public CuentaDto actualizarCuenta(@RequestBody CuentaDto cuentaDto) throws Exception {
         return cuentaServicio.actualizarCuenta(cuentaDto);
