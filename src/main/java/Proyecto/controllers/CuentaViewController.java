@@ -1,13 +1,10 @@
 package Proyecto.controllers;
 
 
-import Proyecto.dtos.CambiarPasswordDTO;
-import Proyecto.dtos.CuentaDto;
+import Proyecto.dtos.*;
 
 import Proyecto.modelo.documentos.Cuenta;
 
-import Proyecto.dtos.InfoCasosDTO;
-import Proyecto.dtos.MensajeDTO;
 import Proyecto.servicios.interfaces.CasoServicio;
 
 import Proyecto.servicios.interfaces.CuentaServicio;
@@ -40,7 +37,6 @@ public class CuentaViewController {
         return cuentaServicio.actualizarCuenta(cuentaDto);
     }
 
-
     // Eliminar un admin por ID: DELETE /api/admin/{id}
     @DeleteMapping("/{id}")
     public void delete(@PathVariable String id) throws Exception {
@@ -53,4 +49,10 @@ public class CuentaViewController {
         return ResponseEntity.ok(new MensajeDTO<>(false,casosCliente));
 
     }
+    @PostMapping("/crearAbogado")
+    public ResponseEntity<MensajeDTO<String>> crearCuentaAbogado(@RequestBody CuentaAbogadoDTO cuentaAbogadoDTO) throws Exception {
+        cuentaServicio.crearCuentaAbogado(cuentaAbogadoDTO);
+        return ResponseEntity.ok(new MensajeDTO<>(false,"Abogado creado correctamente"));
+    }
+
 }

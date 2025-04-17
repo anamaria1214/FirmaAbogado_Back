@@ -189,6 +189,25 @@ public class CuentaServicioImpl implements CuentaServicio {
     }
 
     @Override
+    public void crearCuentaAbogado(CuentaAbogadoDTO cuentaAbogadoDTO) throws Exception {
+        if(getCuentaByEmail(cuentaAbogadoDTO.email())==null){
+            throw new Exception("La cuenta con este correo ya existe");
+        }
+        Cuenta cuenta= new Cuenta();
+        cuenta.setCedula(cuentaAbogadoDTO.cedula());
+        cuenta.setEspecializaciones(cuentaAbogadoDTO.especializaciones());
+        cuenta.setNombre(cuentaAbogadoDTO.nombre());
+        cuenta.setTelefono(cuentaAbogadoDTO.telefono());
+        cuenta.setEmail(cuentaAbogadoDTO.email());
+        cuenta.setPassword(cuentaAbogadoDTO.password());
+        cuenta.setDireccion(cuentaAbogadoDTO.direccion());
+        cuenta.setFechaCreacion(cuentaAbogadoDTO.fechaCreacion());
+        cuenta.setTipoCuenta(TipoCuenta.ABOGADO);
+
+        cuentaRepo.save(cuenta);
+    }
+
+    @Override
     public InformacionCuentaDTO obtenerInfoCuenta(String id) throws Exception {
         return null;
     }

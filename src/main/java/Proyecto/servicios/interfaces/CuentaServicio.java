@@ -23,4 +23,6 @@ public interface CuentaServicio {
     CuentaDto crearCuenta(CuentaDto cuentaDto) throws Exception;
 
     Cuenta getCuentaByCedula(String cedula) throws Exception;
+
+    void crearCuentaAbogado(CuentaAbogadoDTO cuentaAbogadoDTO) throws Exception;
 }
