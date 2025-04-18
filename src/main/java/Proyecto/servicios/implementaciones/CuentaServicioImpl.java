@@ -250,7 +250,7 @@ public class CuentaServicioImpl implements CuentaServicio {
      */
     @Override
     public Cuenta getCuentaByCedula(String cedula) throws Exception {
-        return cuentaRepo.findByEmail(cedula).orElseThrow(()->new Exception("La cuenta no existe"));
+        return cuentaRepo.findByCedula(cedula).orElseThrow(()->new Exception("La cuenta no existe"));
     }
 
     /**

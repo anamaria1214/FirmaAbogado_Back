@@ -54,4 +54,10 @@ public class CuentaViewController {
         return ResponseEntity.ok(new MensajeDTO<>(false,"Abogado creado correctamente"));
     }
 
+    @GetMapping("/getCuentaByCedula/{cedula}")
+    public ResponseEntity<MensajeDTO<Cuenta>> getCuentaByCedula(@PathVariable("cedula")String cedula) throws Exception {
+        Cuenta cuenta= cuentaServicio.getCuentaByCedula(cedula);
+        return ResponseEntity.ok(new MensajeDTO<>(false,cuenta));
+
+    }
 }
