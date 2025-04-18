@@ -58,4 +58,15 @@ public class CasoController {
         return ResponseEntity.ok(new MensajeDTO<>(false,"Correo/s enviado/s correctamente"));
     }
 
+    @PutMapping("/actualizarCaso")
+    ResponseEntity<MensajeDTO<String>> actualizarCaso(@RequestBody ActualizarCasoDTO actualizarCasoDTO) throws Exception {
+        casoServicio.actualizarCaso(actualizarCasoDTO);
+        return ResponseEntity.ok(new MensajeDTO<>(false,"Caso Actualizado correctamente"));
+    }
+
+    @PostMapping("/notificarCambios/{idCaso}")
+    ResponseEntity<MensajeDTO<String>> notificarCambios(@PathVariable("idCaso") String idCaso) throws Exception {
+        casoServicio.notificarCambios(idCaso);
+        return ResponseEntity.ok(new MensajeDTO<>(false,"Se ha notificado de los cambios"));
+    }
 }

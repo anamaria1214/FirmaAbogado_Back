@@ -20,8 +20,6 @@ public interface CasoServicio {
 
     void actualizarCaso(ActualizarCasoDTO actCaso) throws Exception;
 
-    void cambiarEstado(CambiarEstadoDTO cambiarEstado) throws Exception;
-
-    void notificarCambioEstado(NotificarCambioDTO notificarCambioDTO) throws Exception;
+    void notificarCambios(String idCaso) throws Exception;
 
 }

@@ -8,6 +8,7 @@ import Proyecto.modelo.vo.Comentario;
 import Proyecto.repositorios.CasoRepo;
 import Proyecto.repositorios.CuentaRepo;
 import Proyecto.servicios.interfaces.CasoServicio;
+import Proyecto.servicios.interfaces.CuentaServicio;
 import Proyecto.servicios.interfaces.EmailServicio;
 import Proyecto.servicios.interfaces.FirebaseStorageService;
 import org.bson.types.ObjectId;
@@ -21,12 +22,14 @@ import java.util.Optional;
 public class CasoServicioImpl implements CasoServicio {
 
     private final CasoRepo casoRepo;
+    private final CuentaServicio cuentaServicio;
     private final CuentaRepo clienteRepo;
     private final FirebaseStorageService firebaseStorageService;
     private final EmailServicio emailServicio;
 
-    public CasoServicioImpl(CasoRepo casoRepo, CuentaRepo clienteRepo, FirebaseStorageService firebaseStorageService, EmailServicio emailServicio) {
+    public CasoServicioImpl(CasoRepo casoRepo, CuentaServicio cuentaServicio, CuentaRepo clienteRepo, FirebaseStorageService firebaseStorageService, EmailServicio emailServicio) {
         this.casoRepo = casoRepo;
+        this.cuentaServicio = cuentaServicio;
         this.clienteRepo = clienteRepo;
         this.firebaseStorageService = firebaseStorageService;
         this.emailServicio = emailServicio;
@@ -121,16 +124,34 @@ public class CasoServicioImpl implements CasoServicio {
         casoRepo.save(caso);
     }
 
+    /**
+     * Actualiza la información de un caso existente.
+     *
+     * @param actCaso DTO que contiene los datos actualizados del caso.
+     * @throws Exception si el caso no se encuentra en la base de datos.
+     */
     @Override
     public void actualizarCaso(ActualizarCasoDTO actCaso) throws Exception {
+        Optional<Caso> casoOptional= casoRepo.findById(actCaso.idCaso());
+        if(casoOptional.isEmpty()){
+            throw new Exception("Caso no encontrado");
+        }
+        Caso caso = casoOptional.get();
+        caso.setNombreCaso(actCaso.nombreCaso());
+        caso.setDescripcionCaso(actCaso.descripcionCaso());
+        caso.setEstadoCaso(EstadoCaso.valueOf(actCaso.estadoCaso()));
+        caso.setIdCliente(actCaso.clientes());
+        caso.setIdAbogados(actCaso.abogados());
 
+        casoRepo.save(caso);
     }
 
-    @Override
-    public void cambiarEstado(CambiarEstadoDTO cambiarEstado) throws Exception {
-
-    }
-
+    /**
+     * Sube un documento al almacenamiento y lo asocia al caso correspondiente.
+     *
+     * @param subirDocumentosDTO DTO que contiene el ID del caso y el archivo a subir.
+     * @throws Exception si el caso no se encuentra.
+     */
     @Override
     public void subirDocumentos(SubirDocumentosDTO subirDocumentosDTO) throws Exception {
         Optional<Caso> casoOpt = casoRepo.findById(subirDocumentosDTO.idCaso());
@@ -144,11 +165,39 @@ public class CasoServicioImpl implements CasoServicio {
         casoRepo.save(caso);
     }
 
+    /**
+     * Notifica por correo electrónico a los clientes asociados a un caso sobre cambios realizados.
+     *
+     * @param idCaso ID del caso que tuvo modificaciones.
+     * @throws Exception si el caso no se encuentra.
+     */
     @Override
-    public void notificarCambioEstado(NotificarCambioDTO notificarCambioDTO) throws Exception {
+    public void notificarCambios(String idCaso) throws Exception {
+        Optional<Caso> casoOptional= casoRepo.findById(idCaso);
+        if(casoOptional.isEmpty()){
+            throw new Exception("Caso no encontrado");
+        }
+        Caso caso = casoOptional.get();
+        String cuerpo= "El caso con el nombre: "+caso.getNombreCaso()+" " +
+                "tuvo cambios. A continuación se mostrará el estado actual de su caso." +
+                "Nombre :"+caso.getNombreCaso()+
+                "Descripción: "+caso.getDescripcionCaso()+
+                "Estado: "+caso.getEstadoCaso();
+
+        for(String cliente: caso.getIdCliente()){
+            Cuenta cuenta= cuentaServicio.getCuentaByCedula(cliente);
+            EmailDTO emailDTO= new EmailDTO("Cambio en el caso: "+caso.getNombreCaso(), cuerpo, cuenta.getEmail());
+            emailServicio.enviarCorreo(emailDTO);
+        }
 
     }
 
+    /**
+     * Envía un correo personalizado a los clientes relacionados con un caso específico.
+     *
+     * @param correoCasoDTO DTO que contiene el ID del caso, el asunto y el cuerpo del correo.
+     * @throws Exception si el caso o alguno de los clientes no se encuentra.
+     */
     @Override
     public void enviarCorreoSobreCaso(CorreoCasoDTO correoCasoDTO) throws Exception {
         Optional<Caso> casoOptional = casoRepo.findById(correoCasoDTO.idCaso());
@@ -167,6 +216,12 @@ public class CasoServicioImpl implements CasoServicio {
 
     }
 
+    /**
+     * Agrega un comentario a un caso determinado.
+     *
+     * @param comentarCasoDTO DTO con la información del comentario a agregar.
+     * @throws Exception si el caso no se encuentra.
+     */
     @Override
     public void comentarCaso(ComentarCasoDTO comentarCasoDTO) throws Exception {
         Optional<Caso> casoOpt = casoRepo.findById(comentarCasoDTO.idCaso());
@@ -186,3 +241,4 @@ public class CasoServicioImpl implements CasoServicio {
         casoRepo.save(caso);
     }
 }
+
