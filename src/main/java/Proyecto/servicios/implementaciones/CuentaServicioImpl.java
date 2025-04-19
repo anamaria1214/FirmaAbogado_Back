@@ -228,6 +228,10 @@ public class CuentaServicioImpl implements CuentaServicio {
         if(cuentaRepo.findByEmail(cuentaDto.getEmail()).isPresent()){
             throw new Exception("Ya existe una cuenta con este email");
         }
+
+        if(cuentaDto.getNombre()==null || cuentaDto.getEmail()==null || cuentaDto.getCedula().isEmpty() || cuentaDto.getDireccion().isEmpty() || cuentaDto.getPassword().isEmpty() || cuentaDto.getRol().isEmpty() ||  cuentaDto.getTelefono().isEmpty()){
+            throw new Exception("Campos obligatorios vacios");
+        }
         // Convertir de DTO a entidad
         Cuenta cuenta = toEntity(cuentaDto);
 
