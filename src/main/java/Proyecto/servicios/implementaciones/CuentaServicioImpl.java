@@ -232,6 +232,14 @@ public class CuentaServicioImpl implements CuentaServicio {
         if(cuentaDto.getNombre()==null || cuentaDto.getEmail()==null || cuentaDto.getCedula().isEmpty() || cuentaDto.getDireccion().isEmpty() || cuentaDto.getPassword().isEmpty() || cuentaDto.getRol().isEmpty() ||  cuentaDto.getTelefono().isEmpty()){
             throw new Exception("Campos obligatorios vacios");
         }
+
+        if(!cuentaDto.getPassword().equals(cuentaDto.getConfirmarContrasenia())){
+            throw new Exception("Las contraseñas no coinciden");
+        }
+
+        if(cuentaDto.getPassword().length()<6){
+            throw new Exception("Contraseña débil. Debe tener al menos 6 caracteres");
+        }
         // Convertir de DTO a entidad
         Cuenta cuenta = toEntity(cuentaDto);
 
@@ -308,6 +316,7 @@ public class CuentaServicioImpl implements CuentaServicio {
                 cuenta.getEmail(),
                 cuenta.getDireccion(),
         null,
+                null,
                 cuenta.getTipoCuenta().name() // Convertimos el enum a String
         );
     }
