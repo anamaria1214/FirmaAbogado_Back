@@ -47,13 +47,6 @@ public class CasoController {
 
     }
 
-    /*
-    @PostMapping("/subirDocumento")
-    public ResponseEntity<?> subirDocumento(@RequestBody SubirDocumentosDTO subirDocumentosDTO) throws Exception {
-        casoServicio.subirDocumentos(subirDocumentosDTO);
-        return ResponseEntity.ok(new MensajeDTO<>(false,"Documento subido correctamente"));
-    }*/
-
     @GetMapping("/listarCasosAbogado/{id}")
     public ResponseEntity<MensajeDTO<List<InfoCasosDTO>>> listarCasosAbogado(@PathVariable("id")String idAbogado) throws Exception {
         List<InfoCasosDTO> casosAbogados= casoServicio.listarCasosAbogados(idAbogado);
@@ -108,6 +101,21 @@ public class CasoController {
     public ResponseEntity<List<String>> listarDocumentos(@PathVariable String idCaso) {
         Caso caso = casoRepo.findById(idCaso).orElseThrow();
         return ResponseEntity.ok(caso.getDocumentos());
+    }
+
+    @GetMapping("/documento/nombre/{id}")
+    public ResponseEntity<String> obtenerNombreDocumento(@PathVariable String id) {
+        try {
+            GridFSFile archivo = gridFsTemplate.findOne(new Query(Criteria.where("_id").is(id)));
+
+            if (archivo == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Archivo no encontrado");
+            }
+
+            return ResponseEntity.ok(archivo.getFilename());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al obtener nombre del archivo");
+        }
     }
 
     @GetMapping("/descargar/{id}")
