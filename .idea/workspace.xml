@@ -6,9 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="146cf23d-5ac4-4f6e-bb9a-5599ca3eca54" name="Changes" comment="Delete implementado">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/controllers/CuentaViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/controllers/CuentaViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/servicios/implementaciones/CuentaServicioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/servicios/implementaciones/CuentaServicioImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Proyecto/servicios/interfaces/CuentaServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Proyecto/servicios/interfaces/CuentaServicio.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +45,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -119,6 +121,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.ProyectoApplication" />
+        <item itemvalue="Spring Boot.ProyectoApplication" />
+        <item itemvalue="Spring Boot.ProyectoApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -146,6 +150,10 @@
       <workItem from="1741141005118" duration="599000" />
       <workItem from="1741204424013" duration="1704000" />
       <workItem from="1741386790857" duration="3137000" />
+      <workItem from="1741396075131" duration="729000" />
+      <workItem from="1742782561704" duration="2000" />
+      <workItem from="1743788416031" duration="598000" />
+      <workItem from="1745017155979" duration="18000" />
     </task>
     <task id="LOCAL-00001" summary="Crear cuenta, actualizar cuenta funcionando">
       <option name="closed" value="true" />
