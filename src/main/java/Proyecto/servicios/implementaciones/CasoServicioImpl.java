@@ -88,9 +88,11 @@ public class CasoServicioImpl implements CasoServicio {
             throw new Exception("Campos obligatorios vacios");
         }
         ArrayList<Comentario> comentarios= new ArrayList<>();
+        ArrayList<String> documentos= new ArrayList<>();
 
         Caso caso= new Caso();
         caso.setComentarios(comentarios);
+        caso.setDocumentos(documentos);
         caso.setNombreCaso(crearCasoDTO.nombreCaso());
         caso.setDescripcionCaso(crearCasoDTO.descripcion());
         caso.setFechaInicio(crearCasoDTO.fechaCreacion());
