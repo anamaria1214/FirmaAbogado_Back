@@ -167,6 +167,8 @@ public class CuentaServicioImpl implements CuentaServicio {
             }else{
                 throw new Exception("El código es incorrecto");
             }
+        }else{
+            throw new Exception("El código no puede estar vacio");
         }
     }
 
@@ -240,6 +242,7 @@ public class CuentaServicioImpl implements CuentaServicio {
         if(cuentaDto.getPassword().length()<6){
             throw new Exception("Contraseña débil. Debe tener al menos 6 caracteres");
         }
+
         // Convertir de DTO a entidad
         Cuenta cuenta = toEntity(cuentaDto);
 
@@ -273,9 +276,11 @@ public class CuentaServicioImpl implements CuentaServicio {
      */
     @Override
     public void crearCuentaAbogado(CuentaAbogadoDTO cuentaAbogadoDTO) throws Exception {
-        if(getCuentaByEmail(cuentaAbogadoDTO.email())==null){
+        Optional<Cuenta> cuentaOptional= cuentaRepo.findByEmail(cuentaAbogadoDTO.email());
+        if(cuentaOptional.isPresent()){
             throw new Exception("La cuenta con este correo ya existe");
         }
+
         Cuenta cuenta= new Cuenta();
         cuenta.setCedula(cuentaAbogadoDTO.cedula());
         cuenta.setEspecializaciones(cuentaAbogadoDTO.especializaciones());

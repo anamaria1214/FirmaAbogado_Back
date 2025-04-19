@@ -22,11 +22,9 @@ public class CasoController {
     @Autowired
     private CasoServicio casoServicio;
 
-    @Autowired
-    private FirebaseStorageService firebaseStorageService;
 
     @PostMapping("/crearCaso")
-    public ResponseEntity<MensajeDTO<String>> listarCasos(@RequestBody CrearCasoDTO crearCasoDTO) throws Exception {
+    public ResponseEntity<MensajeDTO<String>> crearCaso(@RequestBody CrearCasoDTO crearCasoDTO) throws Exception {
         casoServicio.crearCaso(crearCasoDTO);
         return ResponseEntity.ok(new MensajeDTO<>(false,"Caso creado correctamente"));
 
