@@ -71,4 +71,17 @@ public class PublicController {
         return ResponseEntity.ok(new MensajeDTO<>(false, cuenta));
     }
 
+    /**
+     * Obtiene los datos de una cuenta a partir de su ID.
+     *
+     * @param idCuenta El identificador único de la cuenta a consultar.
+     * @return Una {@link ResponseEntity} que contiene un {@link MensajeDTO} con la cuenta encontrada.
+     * @throws Exception Si no se encuentra ninguna cuenta con el ID proporcionado.
+     */
+    @GetMapping("/findbyid/{idCuenta}")
+    public ResponseEntity<MensajeDTO<Cuenta>> findbyIdCuenta(@PathVariable String idCuenta) throws Exception {
+        Cuenta cuenta= cuentaServicio.getCuentaByIdCuenta(idCuenta);
+        return ResponseEntity.ok(new MensajeDTO<>(false, cuenta));
+    }
+
 }

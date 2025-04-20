@@ -269,6 +269,18 @@ public class CuentaServicioImpl implements CuentaServicio {
     }
 
     /**
+     * Recupera una cuenta del repositorio usando su ID.
+     *
+     * @param idCuenta El identificador único de la cuenta.
+     * @return La cuenta correspondiente al ID proporcionado.
+     * @throws Exception Si no se encuentra ninguna cuenta con el ID dado.
+     */
+    @Override
+    public Cuenta getCuentaByIdCuenta(String idCuenta) throws Exception {
+        return cuentaRepo.findById(idCuenta).orElseThrow(()->new Exception("La cuenta no existe"));
+    }
+
+    /**
      * Crea una cuenta con el rol de ABOGADO a partir de un DTO especializado.
      *
      * @param cuentaAbogadoDTO DTO con los datos del abogado.
