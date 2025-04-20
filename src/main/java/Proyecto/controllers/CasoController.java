@@ -219,6 +219,13 @@ public class CasoController {
         return ResponseEntity.ok(new MensajeDTO<>(false,casos));
     }
 
+    /**
+     * Endpoint para obtener la lista de comentarios asociados a un caso específico.
+     *
+     * @param idCaso ID del caso del cual se desean listar los comentarios.
+     * @return ResponseEntity que contiene un MensajeDTO con la lista de comentarios.
+     * @throws Exception si el caso no existe o ocurre algún error durante la operación.
+     */
     @GetMapping("/listarComentarios/{idCaso}")
     public ResponseEntity<MensajeDTO<List<Comentario>>> listarComentarios(@PathVariable String idCaso) throws Exception {
         List<Comentario> comentarios= casoServicio.listarComentarios(idCaso);
