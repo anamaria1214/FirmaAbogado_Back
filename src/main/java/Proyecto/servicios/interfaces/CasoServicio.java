@@ -1,6 +1,7 @@
 package Proyecto.servicios.interfaces;
 
 import Proyecto.dtos.*;
+import Proyecto.modelo.documentos.Caso;
 
 import java.util.List;
 
@@ -21,5 +22,7 @@ public interface CasoServicio {
     void actualizarCaso(ActualizarCasoDTO actCaso) throws Exception;
 
     void notificarCambios(String idCaso) throws Exception;
+
+    List<Caso> devolverTodosCasos() throws Exception;
 
 }

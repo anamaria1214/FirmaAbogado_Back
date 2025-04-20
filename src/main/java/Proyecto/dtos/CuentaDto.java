@@ -14,7 +14,7 @@ public class CuentaDto {
         private String telefono;
         private String email;
         private String direccion;
-        private String password; // Solo en DTO de entrada
+        private String password;
         private String confirmarContrasenia;
         private String rol; // CLIENTE, ABOGADO, ADMIN
 

@@ -199,6 +199,11 @@ public class CasoServicioImpl implements CasoServicio {
 
     }
 
+    @Override
+    public List<Caso> devolverTodosCasos() throws Exception {
+        return casoRepo.findAll();
+    }
+
     /**
      * Envía un correo personalizado a los clientes relacionados con un caso específico.
      *

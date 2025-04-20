@@ -137,4 +137,10 @@ public class CasoController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al descargar archivo");
         }
     }
+
+    @GetMapping("/listarTodosCasos")
+    public ResponseEntity<MensajeDTO<List<Caso>>> listarDocumentos() throws Exception {
+        List<Caso> casos= casoServicio.devolverTodosCasos();
+        return ResponseEntity.ok(new MensajeDTO<>(false,casos));
+    }
 }
