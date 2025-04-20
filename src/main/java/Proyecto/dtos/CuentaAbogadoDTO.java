@@ -24,7 +24,5 @@ public record CuentaAbogadoDTO(
                                @NotBlank(message="La dirección es obligatoria")
                                String direccion,
                                @NotBlank(message="La dirección es obligatoria")
-                               TipoCuenta tipoCuenta,
-                               @NotNull(message="La fecha es obligatoria")
-                               LocalDateTime fechaCreacion) {
-}
+                               TipoCuenta tipoCuenta
+){}

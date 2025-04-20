@@ -289,7 +289,7 @@ public class CuentaServicioImpl implements CuentaServicio {
         cuenta.setEmail(cuentaAbogadoDTO.email());
         cuenta.setPassword(encriptarPassword(cuentaAbogadoDTO.cedula()));
         cuenta.setDireccion(cuentaAbogadoDTO.direccion());
-        cuenta.setFechaCreacion(cuentaAbogadoDTO.fechaCreacion());
+        cuenta.setFechaCreacion(LocalDateTime.now());
         cuenta.setTipoCuenta(TipoCuenta.ABOGADO);
 
         cuentaRepo.save(cuenta);
