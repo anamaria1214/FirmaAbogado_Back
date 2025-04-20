@@ -287,7 +287,7 @@ public class CuentaServicioImpl implements CuentaServicio {
         cuenta.setNombre(cuentaAbogadoDTO.nombre());
         cuenta.setTelefono(cuentaAbogadoDTO.telefono());
         cuenta.setEmail(cuentaAbogadoDTO.email());
-        cuenta.setPassword(encriptarPassword(cuentaAbogadoDTO.password()));
+        cuenta.setPassword(encriptarPassword(cuentaAbogadoDTO.cedula()));
         cuenta.setDireccion(cuentaAbogadoDTO.direccion());
         cuenta.setFechaCreacion(cuentaAbogadoDTO.fechaCreacion());
         cuenta.setTipoCuenta(TipoCuenta.ABOGADO);

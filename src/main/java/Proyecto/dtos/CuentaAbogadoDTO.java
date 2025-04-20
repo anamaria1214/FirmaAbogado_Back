@@ -21,8 +21,6 @@ public record CuentaAbogadoDTO(
                                String telefono,
                                @NotBlank(message="El correo es obligatorio") @Email(message="No es un correo valido")
                                String email,
-                               @NotBlank(message="La contraseña es obligatoria") @Length(min=6)
-                               String password,
                                @NotBlank(message="La dirección es obligatoria")
                                String direccion,
                                @NotBlank(message="La dirección es obligatoria")
