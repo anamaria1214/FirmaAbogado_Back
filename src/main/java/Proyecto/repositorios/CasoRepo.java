@@ -10,6 +10,11 @@ import java.util.List;
 @Repository
 public interface CasoRepo extends MongoRepository<Caso, String> {
 
+    /**
+     *
+     * @param idCliente
+     * @return
+     */
     @Query("{idCliente:  ?0}")
     List<Caso> buscarCasosPorClientes(String idCliente);
 
