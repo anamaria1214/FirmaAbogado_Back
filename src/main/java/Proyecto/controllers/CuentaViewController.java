@@ -3,6 +3,7 @@ package Proyecto.controllers;
 
 import Proyecto.dtos.*;
 
+import Proyecto.modelo.documentos.Caso;
 import Proyecto.modelo.documentos.Cuenta;
 
 import Proyecto.servicios.interfaces.CasoServicio;
@@ -69,8 +70,8 @@ public class CuentaViewController {
      * @throws Exception si el cliente no existe o hay un error al consultar los casos.
      */
     @GetMapping("/listarCasos/{id}")
-    public ResponseEntity<MensajeDTO<List<InfoCasosDTO>>> listarCasos(@PathVariable("id")String idCliente) throws Exception {
-        List<InfoCasosDTO> casosCliente= casoServicio.listarCasosClientes(idCliente);
+    public ResponseEntity<MensajeDTO<List<Caso>>> listarCasos(@PathVariable("id")String idCliente) throws Exception {
+        List<Caso> casosCliente= casoServicio.listarCasosClientes(idCliente);
         return ResponseEntity.ok(new MensajeDTO<>(false,casosCliente));
 
     }

@@ -42,19 +42,11 @@ public class CasoServicioImpl implements CasoServicio {
      * @throws Exception Si el cliente no existe en la base de datos.
      */
     @Override
-    public List<InfoCasosDTO> listarCasosClientes(String idCliente) throws Exception {
+    public List<Caso> listarCasosClientes(String idCliente) throws Exception {
         if(clienteRepo.findByCedula(idCliente).isEmpty()){
             throw new Exception("Cliente no existe");
         }
-        List<InfoCasosDTO> respuesta= new ArrayList<>();
-        List<Caso> casos= casoRepo.buscarCasosPorClientes(idCliente);
-        for(Caso caso:casos){
-            respuesta.add(new InfoCasosDTO(caso.getNombreCaso(),
-                    caso.getDescripcionCaso(),
-                    caso.getFechaInicio(),
-                    caso.getEstadoCaso().name()));
-        }
-        return respuesta;
+        return casoRepo.buscarCasosPorClientes(idCliente);
     }
 
     /**
@@ -65,16 +57,11 @@ public class CasoServicioImpl implements CasoServicio {
      * @throws Exception Si ocurre algún error durante la consulta.
      */
     @Override
-    public List<InfoCasosDTO> listarCasosAbogados(String idAbogado) throws Exception {
-        List<InfoCasosDTO> infoCasos= new ArrayList<>();
-        List<Caso> casos= casoRepo.buscarCasosPorAbogado(idAbogado);
-        for(Caso caso: casos){
-            infoCasos.add(new InfoCasosDTO(caso.getNombreCaso(),
-                    caso.getDescripcionCaso(),
-                    caso.getFechaInicio(),
-                    caso.getEstadoCaso().name()));
+    public List<Caso> listarCasosAbogados(String idAbogado) throws Exception {
+        if(clienteRepo.findByCedula(idAbogado).isEmpty()){
+            throw new Exception("Cliente no existe");
         }
-        return infoCasos;
+        return casoRepo.buscarCasosPorAbogado(idAbogado);
     }
 
     /**

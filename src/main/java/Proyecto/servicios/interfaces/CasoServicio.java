@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface CasoServicio {
 
-    List<InfoCasosDTO> listarCasosClientes(String idCliente) throws Exception;
+    List<Caso> listarCasosClientes(String idCliente) throws Exception;
 
-    List<InfoCasosDTO> listarCasosAbogados(String idAbogado) throws Exception;
+    List<Caso> listarCasosAbogados(String idAbogado) throws Exception;
 
     void crearCaso(CrearCasoDTO CrearCasoDTO) throws Exception;
 

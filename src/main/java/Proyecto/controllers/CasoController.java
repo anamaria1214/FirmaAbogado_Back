@@ -63,8 +63,8 @@ public class CasoController {
      * @throws Exception si ocurre un error o no se encuentran casos.
      */
     @GetMapping("/listarCasosAbogado/{id}")
-    public ResponseEntity<MensajeDTO<List<InfoCasosDTO>>> listarCasosAbogado(@PathVariable("id")String idAbogado) throws Exception {
-        List<InfoCasosDTO> casosAbogados= casoServicio.listarCasosAbogados(idAbogado);
+    public ResponseEntity<MensajeDTO<List<Caso>>> listarCasosAbogado(@PathVariable("id")String idAbogado) throws Exception {
+        List<Caso> casosAbogados= casoServicio.listarCasosAbogados(idAbogado);
         return ResponseEntity.ok(new MensajeDTO<>(false,casosAbogados));
 
     }
