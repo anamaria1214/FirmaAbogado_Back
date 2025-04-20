@@ -43,7 +43,7 @@ public class CasoServicioImpl implements CasoServicio {
      */
     @Override
     public List<InfoCasosDTO> listarCasosClientes(String idCliente) throws Exception {
-        if(clienteRepo.findById(idCliente).isEmpty()){
+        if(clienteRepo.findByCedula(idCliente).isEmpty()){
             throw new Exception("Cliente no existe");
         }
         List<InfoCasosDTO> respuesta= new ArrayList<>();
