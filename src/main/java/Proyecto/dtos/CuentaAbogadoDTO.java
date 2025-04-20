@@ -22,7 +22,5 @@ public record CuentaAbogadoDTO(
                                @NotBlank(message="El correo es obligatorio") @Email(message="No es un correo valido")
                                String email,
                                @NotBlank(message="La dirección es obligatoria")
-                               String direccion,
-                               @NotBlank(message="La dirección es obligatoria")
-                               TipoCuenta tipoCuenta
+                               String direccion
 ){}

@@ -199,9 +199,31 @@ public class CasoServicioImpl implements CasoServicio {
 
     }
 
+    /**
+     * Devuelve la lista de todos los casos almacenados en la base de datos.
+     *
+     * @return Lista de objetos {@link Caso}.
+     * @throws Exception si ocurre un error al acceder a los datos desde el repositorio.
+     */
     @Override
     public List<Caso> devolverTodosCasos() throws Exception {
         return casoRepo.findAll();
+    }
+
+    /**
+     * Lista todos los comentarios asociados a un caso específico.
+     *
+     * @param idCaso ID del caso del cual se quieren obtener los comentarios.
+     * @return Lista de objetos {@link Comentario} pertenecientes al caso.
+     * @throws Exception si el caso con el ID proporcionado no existe.
+     */
+    @Override
+    public List<Comentario> listarComentarios(String idCaso) throws Exception {
+        Optional<Caso> casoOptional= casoRepo.findById(idCaso);
+        if(casoOptional.isEmpty()) {
+            throw new Exception("No existe el caso");
+        }
+        return casoOptional.get().getComentarios();
     }
 
     /**

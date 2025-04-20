@@ -2,6 +2,7 @@ package Proyecto.controllers;
 
 import Proyecto.dtos.*;
 import Proyecto.modelo.documentos.Caso;
+import Proyecto.modelo.vo.Comentario;
 import Proyecto.repositorios.CasoRepo;
 import Proyecto.servicios.implementaciones.FirebaseStorageServiceImpl;
 import Proyecto.servicios.interfaces.ArchivoServicio;
@@ -40,6 +41,13 @@ public class CasoController {
     private GridFsTemplate gridFsTemplate;
 
 
+    /**
+     * Crea un nuevo caso judicial a partir de los datos proporcionados.
+     *
+     * @param crearCasoDTO DTO con la información del nuevo caso.
+     * @return Mensaje de éxito al crear el caso.
+     * @throws Exception si ocurre algún error durante la creación.
+     */
     @PostMapping("/crearCaso")
     public ResponseEntity<MensajeDTO<String>> crearCaso(@RequestBody CrearCasoDTO crearCasoDTO) throws Exception {
         casoServicio.crearCaso(crearCasoDTO);
@@ -47,6 +55,13 @@ public class CasoController {
 
     }
 
+    /**
+     * Lista los casos asignados a un abogado específico.
+     *
+     * @param idAbogado ID del abogado.
+     * @return Lista de casos asignados al abogado.
+     * @throws Exception si ocurre un error o no se encuentran casos.
+     */
     @GetMapping("/listarCasosAbogado/{id}")
     public ResponseEntity<MensajeDTO<List<InfoCasosDTO>>> listarCasosAbogado(@PathVariable("id")String idAbogado) throws Exception {
         List<InfoCasosDTO> casosAbogados= casoServicio.listarCasosAbogados(idAbogado);
@@ -54,6 +69,13 @@ public class CasoController {
 
     }
 
+    /**
+     * Agrega un comentario a un caso existente.
+     *
+     * @param comentarCasoDTO DTO con los datos del comentario.
+     * @return Mensaje de éxito al comentar el caso.
+     * @throws Exception si el caso no existe o hay un error al agregar el comentario.
+     */
     @PostMapping("/comentarCaso")
     public ResponseEntity<MensajeDTO<String>> listarCasosAbogado(@RequestBody ComentarCasoDTO comentarCasoDTO) throws Exception {
         casoServicio.comentarCaso(comentarCasoDTO);
@@ -61,23 +83,52 @@ public class CasoController {
 
     }
 
+    /**
+     * Envía correos relacionados con un caso específico.
+     *
+     * @param correoCasoDTO DTO con la información para enviar el correo.
+     * @return Mensaje de éxito si los correos se envían correctamente.
+     * @throws Exception si ocurre un error en el envío de correos.
+     */
     @PostMapping("/enviarCorreoSobrecaso")
     ResponseEntity<MensajeDTO<String>> enviarCorreoSobreCaso(@RequestBody CorreoCasoDTO correoCasoDTO) throws Exception {
         casoServicio.enviarCorreoSobreCaso(correoCasoDTO);
         return ResponseEntity.ok(new MensajeDTO<>(false,"Correo/s enviado/s correctamente"));
     }
 
+    /**
+     * Actualiza la información de un caso existente.
+     *
+     * @param actualizarCasoDTO DTO con los nuevos datos del caso.
+     * @return Mensaje de éxito al actualizar el caso.
+     * @throws Exception si el caso no existe o hay errores durante la actualización.
+     */
     @PutMapping("/actualizarCaso")
     ResponseEntity<MensajeDTO<String>> actualizarCaso(@RequestBody ActualizarCasoDTO actualizarCasoDTO) throws Exception {
         casoServicio.actualizarCaso(actualizarCasoDTO);
         return ResponseEntity.ok(new MensajeDTO<>(false,"Caso Actualizado correctamente"));
     }
 
+    /**
+     * Notifica a los usuarios relacionados sobre cambios en un caso específico.
+     *
+     * @param idCaso ID del caso sobre el que se quiere notificar.
+     * @return Mensaje de éxito si la notificación fue enviada.
+     * @throws Exception si ocurre un error durante la notificación.
+     */
     @PostMapping("/notificarCambios/{idCaso}")
     ResponseEntity<MensajeDTO<String>> notificarCambios(@PathVariable("idCaso") String idCaso) throws Exception {
         casoServicio.notificarCambios(idCaso);
         return ResponseEntity.ok(new MensajeDTO<>(false,"Se ha notificado de los cambios"));
     }
+
+    /**
+     * Sube un archivo y lo asocia a un caso existente.
+     *
+     * @param idCaso ID del caso al que se desea asociar el archivo.
+     * @param archivo Archivo a subir en formato multipart.
+     * @return ID del documento guardado o mensaje de error.
+     */
     @PostMapping(value = "/subir", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> subirYAsociarArchivo(
             @RequestParam("idCaso") String idCaso,
@@ -97,12 +148,24 @@ public class CasoController {
         }
     }
 
+    /**
+     * Lista los IDs de los documentos asociados a un caso.
+     *
+     * @param idCaso ID del caso.
+     * @return Lista de IDs de documentos.
+     */
     @GetMapping("/listarDocumentos/{idCaso}")
     public ResponseEntity<List<String>> listarDocumentos(@PathVariable String idCaso) {
         Caso caso = casoRepo.findById(idCaso).orElseThrow();
         return ResponseEntity.ok(caso.getDocumentos());
     }
 
+    /**
+     * Obtiene el nombre original de un documento almacenado en MongoDB GridFS.
+     *
+     * @param id ID del documento.
+     * @return Nombre del archivo o mensaje de error.
+     */
     @GetMapping("/documento/nombre/{id}")
     public ResponseEntity<String> obtenerNombreDocumento(@PathVariable String id) {
         try {
@@ -118,6 +181,12 @@ public class CasoController {
         }
     }
 
+    /**
+     * Descarga un archivo almacenado en MongoDB GridFS a partir de su ID.
+     *
+     * @param id ID del documento a descargar.
+     * @return Archivo como recurso o mensaje de error.
+     */
     @GetMapping("/descargar/{id}")
     public ResponseEntity<?> descargarArchivo(@PathVariable String id) {
         try {
@@ -138,9 +207,22 @@ public class CasoController {
         }
     }
 
+    /**
+     * Lista todos los casos existentes en el sistema.
+     *
+     * @return Lista completa de casos.
+     * @throws Exception si ocurre un error al consultar los casos.
+     */
     @GetMapping("/listarTodosCasos")
     public ResponseEntity<MensajeDTO<List<Caso>>> listarDocumentos() throws Exception {
         List<Caso> casos= casoServicio.devolverTodosCasos();
         return ResponseEntity.ok(new MensajeDTO<>(false,casos));
     }
+
+    @GetMapping("/listarComentarios/{idCaso}")
+    public ResponseEntity<MensajeDTO<List<Comentario>>> listarComentarios(@PathVariable String idCaso) throws Exception {
+        List<Comentario> comentarios= casoServicio.listarComentarios(idCaso);
+        return ResponseEntity.ok(new MensajeDTO<>(false,comentarios));
+    }
+
 }
