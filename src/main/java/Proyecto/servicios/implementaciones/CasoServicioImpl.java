@@ -14,6 +14,7 @@ import Proyecto.servicios.interfaces.FirebaseStorageService;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -131,6 +132,7 @@ public class CasoServicioImpl implements CasoServicio {
             throw new Exception("Caso no encontrado");
         }
         Caso caso = casoOptional.get();
+
         caso.setNombreCaso(actCaso.nombreCaso());
         caso.setDescripcionCaso(actCaso.descripcionCaso());
         caso.setEstadoCaso(EstadoCaso.valueOf(actCaso.estadoCaso()));
@@ -258,7 +260,7 @@ public class CasoServicioImpl implements CasoServicio {
         Comentario comentario= new Comentario(new ObjectId().toHexString(),
                 comentarCasoDTO.asunto(),
                 comentarCasoDTO.descripcion(),
-                comentarCasoDTO.fecha(),
+                LocalDateTime.now(),
                 comentarCasoDTO.idCuenta());
 
         caso.getComentarios().add(comentario);
