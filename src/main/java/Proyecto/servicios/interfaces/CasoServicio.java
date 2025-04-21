@@ -16,8 +16,6 @@ public interface CasoServicio {
 
     void enviarCorreoSobreCaso(CorreoCasoDTO correoCasoDTO) throws Exception;
 
-    void subirDocumentos(SubirDocumentosDTO subirDocumentosDTO) throws Exception;
-
     void comentarCaso(ComentarCasoDTO comentarCasoDTO) throws Exception;
 
     void actualizarCaso(ActualizarCasoDTO actCaso) throws Exception;

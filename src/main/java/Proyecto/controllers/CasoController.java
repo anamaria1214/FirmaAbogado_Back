@@ -10,6 +10,7 @@ import Proyecto.servicios.interfaces.CasoServicio;
 import Proyecto.servicios.interfaces.CuentaServicio;
 import Proyecto.servicios.interfaces.FirebaseStorageService;
 import com.mongodb.client.gridfs.model.GridFSFile;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -188,20 +189,22 @@ public class CasoController {
     @GetMapping("/descargar/{id}")
     public ResponseEntity<?> descargarArchivo(@PathVariable String id) {
         try {
-            GridFSFile archivo = gridFsTemplate.findOne(new Query(Criteria.where("_id").is(id)));
+            GridFSFile file = gridFsTemplate.findOne(new Query(Criteria.where("_id").is(new ObjectId(id))));
 
-            if (archivo == null) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Archivo no encontrado");
+            if (file == null) {
+                return ResponseEntity.notFound().build();
             }
 
-            GridFsResource resource = gridFsTemplate.getResource(archivo);
+            GridFsResource resource = gridFsTemplate.getResource(file);
 
+            assert file.getMetadata() != null;
             return ResponseEntity.ok()
-                    .contentType(MediaType.parseMediaType(resource.getContentType() != null ? resource.getContentType() : "application/octet-stream"))
+                    .contentType(MediaType.valueOf(file.getMetadata().get("contentType").toString()))
                     .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
-                    .body(new InputStreamResource(resource.getInputStream())); // <- este cambio es clave
+                    .body(new InputStreamResource(resource.getInputStream()));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al descargar archivo");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
         }
     }
 
