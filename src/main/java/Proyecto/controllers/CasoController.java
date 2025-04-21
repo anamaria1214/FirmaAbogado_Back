@@ -11,6 +11,7 @@ import Proyecto.servicios.interfaces.CuentaServicio;
 import Proyecto.servicios.interfaces.FirebaseStorageService;
 import com.mongodb.client.gridfs.model.GridFSFile;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.gridfs.GridFsResource;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
@@ -196,9 +197,9 @@ public class CasoController {
             GridFsResource resource = gridFsTemplate.getResource(archivo);
 
             return ResponseEntity.ok()
-                    .contentType(MediaType.parseMediaType(resource.getContentType()))
+                    .contentType(MediaType.parseMediaType(resource.getContentType() != null ? resource.getContentType() : "application/octet-stream"))
                     .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
-                    .body(resource);
+                    .body(new InputStreamResource(resource.getInputStream())); // <- este cambio es clave
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al descargar archivo");
         }
