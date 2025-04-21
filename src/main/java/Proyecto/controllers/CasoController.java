@@ -125,19 +125,16 @@ public class CasoController {
     /**
      * Sube un archivo y lo asocia a un caso existente.
      *
-     * @param idCaso ID del caso al que se desea asociar el archivo.
-     * @param archivo Archivo a subir en formato multipart.
+     * @param subirDocumentosDTO ID del caso al que se desea asociar el archivo y Archivo a subir en formato multipart.
      * @return ID del documento guardado o mensaje de error.
      */
     @PostMapping(value = "/subir", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<String> subirYAsociarArchivo(
-            @RequestParam("idCaso") String idCaso,
-            @RequestParam("archivo") MultipartFile archivo) {
+    public ResponseEntity<String> subirYAsociarArchivo(SubirDocumentosDTO subirDocumentosDTO) {
 
         try {
-            String idDocumento = archivoServicio.guardarArchivo(archivo);
+            String idDocumento = archivoServicio.guardarArchivo(subirDocumentosDTO.archivo());
 
-            Caso caso = casoRepo.findById(idCaso).orElseThrow();
+            Caso caso = casoRepo.findById(subirDocumentosDTO.idCaso()).orElseThrow();
             caso.getDocumentos().add(idDocumento);
             casoRepo.save(caso);
 
