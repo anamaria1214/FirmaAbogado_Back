@@ -128,7 +128,7 @@ public class CasoController {
      * @param subirDocumentosDTO ID del caso al que se desea asociar el archivo y Archivo a subir en formato multipart.
      * @return ID del documento guardado o mensaje de error.
      */
-    @PostMapping(value = "/subir", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/subirDocumento", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> subirYAsociarArchivo(SubirDocumentosDTO subirDocumentosDTO) {
 
         try {
