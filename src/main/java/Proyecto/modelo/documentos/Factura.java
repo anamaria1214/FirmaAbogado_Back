@@ -28,6 +28,6 @@ public class Factura {
     private float valor;
     private LocalDateTime fecha;
     private List<Abono> abonos;
-    private ObjectId idCaso;
+    private String idCaso;
 
 }

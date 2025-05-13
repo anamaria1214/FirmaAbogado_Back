@@ -199,6 +199,15 @@ public class CasoServicioImpl implements CasoServicio {
 
     }
 
+    @Override
+    public Caso getCasoById(String idCaso){
+        Optional<Caso> caso= casoRepo.findById(idCaso);
+        if(caso.isEmpty()){
+            return null;
+        }
+        return caso.get();
+    }
+
     /**
      * Envía un correo personalizado a los clientes relacionados con un caso específico.
      *
