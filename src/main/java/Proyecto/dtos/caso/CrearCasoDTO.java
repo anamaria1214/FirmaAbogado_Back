@@ -1,4 +1,4 @@
-package Proyecto.dtos;
+package Proyecto.dtos.caso;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

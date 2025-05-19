@@ -1,6 +1,7 @@
 package Proyecto.servicios.implementaciones;
 
 import Proyecto.dtos.*;
+import Proyecto.dtos.caso.*;
 import Proyecto.modelo.documentos.Caso;
 import Proyecto.modelo.documentos.Cuenta;
 import Proyecto.modelo.enums.EstadoCaso;

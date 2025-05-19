@@ -1,13 +1,11 @@
 package Proyecto.controllers;
 
 import Proyecto.dtos.*;
+import Proyecto.dtos.caso.*;
 import Proyecto.modelo.documentos.Caso;
 import Proyecto.repositorios.CasoRepo;
-import Proyecto.servicios.implementaciones.FirebaseStorageServiceImpl;
 import Proyecto.servicios.interfaces.ArchivoServicio;
 import Proyecto.servicios.interfaces.CasoServicio;
-import Proyecto.servicios.interfaces.CuentaServicio;
-import Proyecto.servicios.interfaces.FirebaseStorageService;
 import com.mongodb.client.gridfs.model.GridFSFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -20,10 +18,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Criteria;
 
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin(origins = "https://laleydelhielo.vercel.app",  allowCredentials = "true")
 @RestController

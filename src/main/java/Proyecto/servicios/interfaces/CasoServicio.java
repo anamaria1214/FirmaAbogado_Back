@@ -1,6 +1,7 @@
 package Proyecto.servicios.interfaces;
 
 import Proyecto.dtos.*;
+import Proyecto.dtos.caso.*;
 import Proyecto.modelo.documentos.Caso;
 
 import java.util.List;

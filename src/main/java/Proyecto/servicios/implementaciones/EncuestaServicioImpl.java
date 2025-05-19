@@ -2,6 +2,7 @@ package Proyecto.servicios.implementaciones;
 
 import Proyecto.dtos.encuesta.EncuestaDto;
 import Proyecto.modelo.documentos.Encuesta;
+import Proyecto.modelo.enums.TipoCuenta;
 import Proyecto.repositorios.EncuestaRepo;
 import Proyecto.servicios.interfaces.CasoServicio;
 import Proyecto.servicios.interfaces.CuentaServicio;
@@ -32,6 +33,10 @@ public class EncuestaServicioImpl implements EncuestaServicio {
         }
         if(casoServicio.getCasoById(encuestaDto.idCaso())==null){
             throw new Exception("El caso no existe");
+        }
+
+        if(cuentaServicio.getCuentaById(encuestaDto.cedula()).getRol().equals(TipoCuenta.ABOGADO.name())){
+            throw new Exception("El abogado no puede responder una encuesta de satisfacción");
         }
 
         encuesta.setIdCaso(encuestaDto.idCaso());

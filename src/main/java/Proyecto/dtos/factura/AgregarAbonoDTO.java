@@ -1,4 +1,4 @@
 package Proyecto.dtos.factura;
 
-public record AgregarAbonoDTO() {
+public record AgregarAbonoDTO(float monto, String idFactura) {
 }

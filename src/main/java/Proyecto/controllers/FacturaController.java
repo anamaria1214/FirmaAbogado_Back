@@ -2,16 +2,20 @@ package Proyecto.controllers;
 
 import Proyecto.dtos.MensajeDTO;
 import Proyecto.dtos.factura.ActualizarFacturaDTO;
+import Proyecto.dtos.factura.AgregarAbonoDTO;
 import Proyecto.dtos.factura.CrearFacturaDTO;
 import Proyecto.modelo.documentos.Factura;
-import Proyecto.modelo.vo.Abono;
+import Proyecto.modelo.documentos.Abono;
 import Proyecto.servicios.interfaces.FacturaServicio;
+import com.mercadopago.net.HttpStatus;
+import com.mercadopago.resources.preference.Preference;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = "https://laleydelhielo.vercel.app",  allowCredentials = "true")
 @RestController
@@ -47,4 +51,27 @@ public class FacturaController {
         return ResponseEntity.ok(new MensajeDTO<>(false,factura));
 
     }
+    @PostMapping("/agregarAbono")
+    public ResponseEntity<MensajeDTO<String>> agregarAbono(@RequestBody AgregarAbonoDTO agregarAbonoDTO) throws Exception {
+        facturaServicio.agregarAbono(agregarAbonoDTO);
+        return ResponseEntity.ok(new MensajeDTO<>(false,"Abono agregado correctamente"));
+    }
+
+    @PostMapping("/realizarPago/{idAbono}")
+    public ResponseEntity<MensajeDTO<Preference>> realizarPago(@PathVariable("idAbono")String idAbono) throws Exception {
+        Preference preference= facturaServicio.realizarPago(idAbono);
+        return ResponseEntity.ok(new MensajeDTO<>(false,preference));
+    }
+
+    @PostMapping("/mercadopago/notificacion")
+    public ResponseEntity<String> recibirNotificacion(@RequestBody Map<String, Object> request) {
+        try {
+            facturaServicio.recibirNotificacionMercadoPago(request);
+            return ResponseEntity.ok("Notificación recibida correctamente");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error procesando la notificación");
+        }
+    }
+
+
 }

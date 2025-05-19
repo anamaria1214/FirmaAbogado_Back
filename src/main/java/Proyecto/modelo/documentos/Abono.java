@@ -1,34 +1,26 @@
 package Proyecto.modelo.documentos;
 
-import Proyecto.modelo.enums.EstadoFactura;
+import Proyecto.modelo.enums.EstadoPago;
+import Proyecto.modelo.vo.Pago;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Document("facturas")
-public class Factura {
+@Document("abonos")
+public class Abono {
 
     @Id
     @EqualsAndHashCode.Include
-    private String idFactura;
-
-    private String concepto;
-    private String descripcion;
-    private EstadoFactura estadoFactura;
-    private float valor;
+    private String id;
     private LocalDateTime fecha;
-    private List<String> abonos;
-    private String idCaso;
-    private float saldoPendiente;
-
-
-
+    private float monto;
+    private Pago pago;
+    private String codigoPasarela;
 }
