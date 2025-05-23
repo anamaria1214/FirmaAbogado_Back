@@ -131,7 +131,7 @@ public class FacturaServicioImpl implements FacturaServicio {
                         .build();
         itemsPasarela.add(itemRequest);
 
-        MercadoPagoConfig.setAccessToken("APP_USR-6836838816381200-051815-a567ec3c1ec70992bede966b3763e63c-2019622130");
+        MercadoPagoConfig.setAccessToken("APP_USR-272595559782865-100719-958683f0949a50e7a8b92b77f7a696bf-2026139478");
         PreferenceBackUrlsRequest backUrls = PreferenceBackUrlsRequest.builder()
                 .success("URL PAGO EXITOSO")
                 .failure("URL PAGO FALLIDO")
@@ -141,7 +141,7 @@ public class FacturaServicioImpl implements FacturaServicio {
                 .backUrls(backUrls)
                 .items(itemsPasarela)
                 .metadata(Map.of("id_abono", abono.getId()))
-                .notificationUrl("https://eabe-2800-e2-837f-fe9c-19f-3b51-7024-b7b0.ngrok-free.app")
+                .notificationUrl("https://f46f-191-106-134-251.ngrok-free.app/api/factura/mercadopago/notificacion")
                 .build();
         PreferenceClient client = new PreferenceClient();
         Preference preference = client.create(preferenceRequest);
@@ -158,6 +158,7 @@ public class FacturaServicioImpl implements FacturaServicio {
             Object tipo = request.get("type");
 
             if ("payment".equals(tipo)) {
+                System.out.println(request);
                 String input = request.get("data").toString();
                 String idPago = input.replaceAll("\\D+", "");
 
@@ -171,7 +172,6 @@ public class FacturaServicioImpl implements FacturaServicio {
                 abono.setPago(pago);
                 abonoRepo.save(abono);
             }
-
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -191,9 +191,11 @@ public class FacturaServicioImpl implements FacturaServicio {
     @Override
     public void actualizarValorCaso(String idFactura) throws Exception {
         Factura factura= getFacturaById(idFactura);
+
         float valorRestante = 0;
         for(String idAbono: factura.getAbonos()){
             Abono abono= obtenerAbono(idAbono);
+            //abono.getPago().getEstado().equals("approved")
             valorRestante= factura.getValor()- abono.getMonto();
         }
         factura.setSaldoPendiente(valorRestante);
