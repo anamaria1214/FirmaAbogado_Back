@@ -1,6 +1,7 @@
-package Proyecto.dtos;
+package Proyecto.dtos.caso;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 public record CrearCasoDTO(
         @NotBlank(message="El nombre del caso es obligatorio")
         String nombreCaso,
-        @NotBlank(message="La descripción del caso es obligatorio")
+        @NotNull(message="La descripción del caso es obligatorio")
         String descripcion,
         @NotBlank(message="La fecha de apertura del caso es obligatorio")
         LocalDateTime fechaCreacion,

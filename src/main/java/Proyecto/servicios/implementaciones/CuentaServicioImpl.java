@@ -2,6 +2,7 @@ package Proyecto.servicios.implementaciones;
 
 import Proyecto.config.JWTUtils;
 import Proyecto.dtos.*;
+import Proyecto.dtos.cuenta.*;
 import Proyecto.modelo.documentos.Cuenta;
 import Proyecto.modelo.enums.TipoCuenta;
 import Proyecto.modelo.vo.CodigoValidacion;
@@ -167,6 +168,8 @@ public class CuentaServicioImpl implements CuentaServicio {
             }else{
                 throw new Exception("El código es incorrecto");
             }
+        }else{
+            throw new Exception("El código no puede estar vacio");
         }
     }
 
@@ -228,6 +231,19 @@ public class CuentaServicioImpl implements CuentaServicio {
         if(cuentaRepo.findByEmail(cuentaDto.getEmail()).isPresent()){
             throw new Exception("Ya existe una cuenta con este email");
         }
+
+        if(cuentaDto.getNombre()==null || cuentaDto.getEmail()==null || cuentaDto.getCedula().isEmpty() || cuentaDto.getDireccion().isEmpty() || cuentaDto.getPassword().isEmpty() || cuentaDto.getRol().isEmpty() ||  cuentaDto.getTelefono().isEmpty()){
+            throw new Exception("Campos obligatorios vacios");
+        }
+
+        if(!cuentaDto.getPassword().equals(cuentaDto.getConfirmarContrasenia())){
+            throw new Exception("Las contraseñas no coinciden");
+        }
+
+        if(cuentaDto.getPassword().length()<6){
+            throw new Exception("Contraseña débil. Debe tener al menos 6 caracteres");
+        }
+
         // Convertir de DTO a entidad
         Cuenta cuenta = toEntity(cuentaDto);
 
@@ -261,9 +277,11 @@ public class CuentaServicioImpl implements CuentaServicio {
      */
     @Override
     public void crearCuentaAbogado(CuentaAbogadoDTO cuentaAbogadoDTO) throws Exception {
-        if(getCuentaByEmail(cuentaAbogadoDTO.email())==null){
+        Optional<Cuenta> cuentaOptional= cuentaRepo.findByEmail(cuentaAbogadoDTO.email());
+        if(cuentaOptional.isPresent()){
             throw new Exception("La cuenta con este correo ya existe");
         }
+
         Cuenta cuenta= new Cuenta();
         cuenta.setCedula(cuentaAbogadoDTO.cedula());
         cuenta.setEspecializaciones(cuentaAbogadoDTO.especializaciones());
@@ -304,6 +322,7 @@ public class CuentaServicioImpl implements CuentaServicio {
                 cuenta.getEmail(),
                 cuenta.getDireccion(),
         null,
+                null,
                 cuenta.getTipoCuenta().name() // Convertimos el enum a String
         );
     }

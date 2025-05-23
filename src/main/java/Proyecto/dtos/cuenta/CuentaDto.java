@@ -1,4 +1,4 @@
-package Proyecto.dtos;
+package Proyecto.dtos.cuenta;
 
 
 import lombok.*;
@@ -15,6 +15,7 @@ public class CuentaDto {
         private String email;
         private String direccion;
         private String password; // Solo en DTO de entrada
+        private String confirmarContrasenia;
         private String rol; // CLIENTE, ABOGADO, ADMIN
 
 }

@@ -1,9 +1,9 @@
 package Proyecto.controllers;
 
-import Proyecto.dtos.CambiarPasswordDTO;
-import Proyecto.dtos.LoginDTO;
+import Proyecto.dtos.cuenta.CambiarPasswordDTO;
+import Proyecto.dtos.cuenta.LoginDTO;
 import Proyecto.dtos.MensajeDTO;
-import Proyecto.dtos.TokenDTO;
+import Proyecto.dtos.cuenta.TokenDTO;
 import Proyecto.modelo.documentos.Cuenta;
 import Proyecto.servicios.interfaces.CuentaServicio;
 import jakarta.validation.Valid;

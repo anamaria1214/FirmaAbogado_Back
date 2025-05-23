@@ -1,4 +1,4 @@
-package Proyecto.dtos;
+package Proyecto.dtos.cuenta;
 
 import Proyecto.modelo.enums.TipoCuenta;
 import jakarta.validation.constraints.Email;
@@ -19,7 +19,7 @@ public record CuentaAbogadoDTO(
                                String nombre,
                                @NotBlank(message="El teléfono es obligatorio") @Length(min=7)
                                String telefono,
-                               @NotBlank(message="El correo es obligatorio") @Email
+                               @NotBlank(message="El correo es obligatorio") @Email(message="No es un correo valido")
                                String email,
                                @NotBlank(message="La contraseña es obligatoria") @Length(min=6)
                                String password,

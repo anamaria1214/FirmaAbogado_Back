@@ -1,6 +1,7 @@
 package Proyecto.servicios.implementaciones;
 
 import Proyecto.dtos.*;
+import Proyecto.dtos.caso.*;
 import Proyecto.modelo.documentos.Caso;
 import Proyecto.modelo.documentos.Cuenta;
 import Proyecto.modelo.enums.EstadoCaso;
@@ -77,7 +78,6 @@ public class CasoServicioImpl implements CasoServicio {
         return infoCasos;
     }
 
-
     /**
      * Crea un nuevo caso legal en el sistema con la información proporcionada.
      * @param crearCasoDTO Objeto DTO con la información del caso a crear.
@@ -85,7 +85,15 @@ public class CasoServicioImpl implements CasoServicio {
      */
     @Override
     public void crearCaso(CrearCasoDTO crearCasoDTO) throws Exception {
+        if(crearCasoDTO.nombreCaso().isEmpty() || crearCasoDTO.descripcion().isEmpty() || crearCasoDTO.abogados().isEmpty() || crearCasoDTO.clientes().isEmpty()){
+            throw new Exception("Campos obligatorios vacios");
+        }
+        ArrayList<Comentario> comentarios= new ArrayList<>();
+        ArrayList<String> documentos= new ArrayList<>();
+
         Caso caso= new Caso();
+        caso.setComentarios(comentarios);
+        caso.setDocumentos(documentos);
         caso.setNombreCaso(crearCasoDTO.nombreCaso());
         caso.setDescripcionCaso(crearCasoDTO.descripcion());
         caso.setFechaInicio(crearCasoDTO.fechaCreacion());
@@ -192,6 +200,15 @@ public class CasoServicioImpl implements CasoServicio {
 
     }
 
+    @Override
+    public Caso getCasoById(String idCaso){
+        Optional<Caso> caso= casoRepo.findById(idCaso);
+        if(caso.isEmpty()){
+            return null;
+        }
+        return caso.get();
+    }
+
     /**
      * Envía un correo personalizado a los clientes relacionados con un caso específico.
      *
@@ -210,7 +227,7 @@ public class CasoServicioImpl implements CasoServicio {
             if(cuenta.isEmpty()){
                 throw new Exception("Cliente no encontrado");
             }
-            EmailDTO emailDTO= new EmailDTO(correoCasoDTO.asunto(), "Correo mandado acerca del caso "+caso.getNombreCaso()+ ": "+correoCasoDTO.cuerpo(), cuenta.get().getEmail());
+            EmailDTO emailDTO= new EmailDTO(correoCasoDTO.asunto(), "Correo enviado acerca del caso "+caso.getNombreCaso()+ ": "+correoCasoDTO.cuerpo(), cuenta.get().getEmail());
             emailServicio.enviarCorreo(emailDTO);
         }
 
@@ -224,6 +241,9 @@ public class CasoServicioImpl implements CasoServicio {
      */
     @Override
     public void comentarCaso(ComentarCasoDTO comentarCasoDTO) throws Exception {
+        if(comentarCasoDTO.asunto().isEmpty() || comentarCasoDTO.descripcion().isEmpty()){
+            throw new Exception("Campos obligatorios vacios");
+        }
         Optional<Caso> casoOpt = casoRepo.findById(comentarCasoDTO.idCaso());
         if (casoOpt.isEmpty()) {
             throw new Exception("Caso no encontrado.");
