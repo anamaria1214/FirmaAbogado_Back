@@ -3,6 +3,8 @@ package Proyecto.servicios.interfaces;
 import Proyecto.dtos.*;
 import Proyecto.modelo.documentos.Caso;
 import Proyecto.modelo.vo.Comentario;
+import Proyecto.dtos.caso.*;
+import Proyecto.modelo.documentos.Caso;
 
 import java.util.List;
 
@@ -23,7 +25,7 @@ public interface CasoServicio {
     void notificarCambios(String idCaso) throws Exception;
 
     List<Caso> devolverTodosCasos() throws Exception;
-
     List<Comentario> listarComentarios(String idCaso) throws Exception;
+    Caso getCasoById(String idCaso);
 
 }

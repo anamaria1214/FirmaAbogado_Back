@@ -1,4 +1,4 @@
-package Proyecto.dtos;
+package Proyecto.dtos.cuenta;
 
 
 import lombok.*;

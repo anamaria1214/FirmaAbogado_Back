@@ -2,6 +2,7 @@ package Proyecto.servicios.implementaciones;
 
 import Proyecto.config.JWTUtils;
 import Proyecto.dtos.*;
+import Proyecto.dtos.cuenta.*;
 import Proyecto.modelo.documentos.Cuenta;
 import Proyecto.modelo.enums.TipoCuenta;
 import Proyecto.modelo.vo.CodigoValidacion;

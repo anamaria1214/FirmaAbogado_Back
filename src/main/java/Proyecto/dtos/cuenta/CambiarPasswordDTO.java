@@ -1,4 +1,4 @@
-package Proyecto.dtos;
+package Proyecto.dtos.cuenta;
 
 import jakarta.validation.constraints.Email;
 import org.hibernate.validator.constraints.Length;

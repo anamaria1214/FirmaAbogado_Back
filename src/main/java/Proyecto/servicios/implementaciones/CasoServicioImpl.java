@@ -1,6 +1,7 @@
 package Proyecto.servicios.implementaciones;
 
 import Proyecto.dtos.*;
+import Proyecto.dtos.caso.*;
 import Proyecto.modelo.documentos.Caso;
 import Proyecto.modelo.documentos.Cuenta;
 import Proyecto.modelo.enums.EstadoCaso;
@@ -185,6 +186,15 @@ public class CasoServicioImpl implements CasoServicio {
             emailServicio.enviarCorreo(emailDTO);
         }
 
+    }
+
+    @Override
+    public Caso getCasoById(String idCaso){
+        Optional<Caso> caso= casoRepo.findById(idCaso);
+        if(caso.isEmpty()){
+            return null;
+        }
+        return caso.get();
     }
 
     /**

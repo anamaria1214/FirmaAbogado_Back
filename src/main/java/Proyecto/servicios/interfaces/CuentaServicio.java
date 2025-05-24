@@ -1,6 +1,6 @@
 package Proyecto.servicios.interfaces;
 
-import Proyecto.dtos.*;
+import Proyecto.dtos.cuenta.*;
 import Proyecto.modelo.documentos.Cuenta;
 
 public interface CuentaServicio {

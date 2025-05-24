@@ -1,4 +1,4 @@
-package Proyecto.dtos;
+package Proyecto.dtos.cuenta;
 
 import Proyecto.modelo.enums.TipoCuenta;
 import jakarta.validation.constraints.Email;

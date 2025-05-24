@@ -1,4 +1,4 @@
-package Proyecto.dtos;
+package Proyecto.dtos.caso;
 
 public record CambiarEstadoDTO() {
 }

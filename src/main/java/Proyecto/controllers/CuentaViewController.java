@@ -4,12 +4,14 @@ package Proyecto.controllers;
 import Proyecto.dtos.*;
 
 import Proyecto.modelo.documentos.Caso;
+import Proyecto.dtos.caso.InfoCasosDTO;
+import Proyecto.dtos.cuenta.CuentaAbogadoDTO;
+import Proyecto.dtos.cuenta.CuentaDto;
 import Proyecto.modelo.documentos.Cuenta;
 
 import Proyecto.servicios.interfaces.CasoServicio;
 
 import Proyecto.servicios.interfaces.CuentaServicio;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
