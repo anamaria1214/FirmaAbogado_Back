@@ -62,12 +62,17 @@ public class FacturaServicioImpl implements FacturaServicio {
     @Override
     public void actualizarFactura(ActualizarFacturaDTO actualizarFacturaDTO) throws Exception {
         Factura factura = getFacturaById(actualizarFacturaDTO.idFactura());
-
+        float nuevoSaldo=0;
+        if(factura.getValor()>actualizarFacturaDTO.valor()){
+            nuevoSaldo=factura.getSaldoPendiente()-(factura.getValor()-actualizarFacturaDTO.valor());
+        }else{
+            nuevoSaldo=factura.getSaldoPendiente()+(actualizarFacturaDTO.valor()-factura.getValor());
+        }
         factura.setConcepto(actualizarFacturaDTO.concepto());
         factura.setDescripcion(actualizarFacturaDTO.descripcion());
         factura.setEstadoFactura(EstadoFactura.valueOf(actualizarFacturaDTO.estado()));
         factura.setValor(actualizarFacturaDTO.valor());
-
+        factura.setSaldoPendiente(nuevoSaldo);
         facturaRepo.save(factura);
     }
 
