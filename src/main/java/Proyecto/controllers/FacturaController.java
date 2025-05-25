@@ -6,6 +6,7 @@ import Proyecto.dtos.factura.AgregarAbonoDTO;
 import Proyecto.dtos.factura.CrearFacturaDTO;
 import Proyecto.modelo.documentos.Factura;
 import Proyecto.modelo.documentos.Abono;
+import Proyecto.servicios.interfaces.EstadisticasServicio;
 import Proyecto.servicios.interfaces.FacturaServicio;
 import com.mercadopago.net.HttpStatus;
 import com.mercadopago.resources.preference.Preference;
@@ -25,6 +26,8 @@ public class FacturaController {
 
     @Autowired
     private FacturaServicio facturaServicio;
+    @Autowired
+    private EstadisticasServicio estadisticasServicio;
 
     @PostMapping("/crearFactura")
     public ResponseEntity<MensajeDTO<String>> crearCaso(@RequestBody CrearFacturaDTO crearFacturaDTO) throws Exception {
@@ -73,5 +76,39 @@ public class FacturaController {
         }
     }
 
+    //Controladores para las estadísticas
+    @GetMapping("/porcentajeFacturasPagadas")
+    public ResponseEntity<MensajeDTO<Float>> porcentajeFacturasPagadas() throws Exception {
+        float valor= estadisticasServicio.porcentajeFacturasPagadas();
+        return ResponseEntity.ok(new MensajeDTO<>(false,valor));
+
+    }
+    @GetMapping("/porcentajeFacturasParciales")
+    public ResponseEntity<MensajeDTO<Float>> porcentajeFacturasParciales() throws Exception {
+        float valor= estadisticasServicio.porcentajeFacturasParciales();
+        return ResponseEntity.ok(new MensajeDTO<>(false,valor));
+
+    }
+    @GetMapping("/porcentajeFacturasPendientes")
+    public ResponseEntity<MensajeDTO<Float>> porcentajeFacturasPendientes() throws Exception {
+        float valor= estadisticasServicio.porcentajeFacturasPendientes();
+        return ResponseEntity.ok(new MensajeDTO<>(false,valor));
+
+    }
+    @GetMapping("/valorFacturas")
+    public ResponseEntity<MensajeDTO<Float>> valorFacturas() throws Exception {
+        float valor= estadisticasServicio.valorFacturas();
+        return ResponseEntity.ok(new MensajeDTO<>(false,valor));
+    }
+    @GetMapping("/dineroRecaudado")
+    public ResponseEntity<MensajeDTO<Float>> dineroRecaudado() throws Exception {
+        float valor= estadisticasServicio.dineroRecaudado();
+        return ResponseEntity.ok(new MensajeDTO<>(false,valor));
+    }
+    @GetMapping("/dineroRestante")
+    public ResponseEntity<MensajeDTO<Float>> dineroRestante() throws Exception {
+        float valor= estadisticasServicio.dineroRestante();
+        return ResponseEntity.ok(new MensajeDTO<>(false,valor));
+    }
 
 }
