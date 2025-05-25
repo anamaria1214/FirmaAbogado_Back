@@ -41,6 +41,10 @@ public class FacturaServicioImpl implements FacturaServicio {
 
     @Override
     public void crearFactura(CrearFacturaDTO crearFacturaDTO) throws Exception {
+        Optional<Factura> facturaOptional= facturaRepo.findByCaso(crearFacturaDTO.idCaso());
+        if(facturaOptional.isPresent()){
+            throw new Exception("Ya hay una factura creada para el caso");
+        }
         List<String> abonos = new ArrayList<>();
         Factura factura = new Factura();
         factura.setConcepto(crearFacturaDTO.concepto());
