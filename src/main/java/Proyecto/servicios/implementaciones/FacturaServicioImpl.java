@@ -86,9 +86,14 @@ public class FacturaServicioImpl implements FacturaServicio {
         abono.setMonto(agregarAbonoDTO.monto());
         abono.setFecha(LocalDateTime.now());
         abonoRepo.save(abono);
+        if(factura.getAbonos().isEmpty()){
+            factura.setEstadoFactura(EstadoFactura.PARCIAL);
+        }
+
         factura.getAbonos().add(abono.getId());
-        factura.setEstadoFactura(EstadoFactura.PARCIAL);
         facturaRepo.save(factura);
+
+        actualizarValorCaso(factura.getIdFactura());
     }
 
     @Override
@@ -199,17 +204,30 @@ public class FacturaServicioImpl implements FacturaServicio {
 
     @Override
     public void actualizarValorCaso(String idFactura) throws Exception {
-        Factura factura= getFacturaById(idFactura);
+        Factura factura = getFacturaById(idFactura);
 
-        float valorRestante = 0;
-        for(String idAbono: factura.getAbonos()){
-            Abono abono= obtenerAbono(idAbono);
-            //abono.getPago().getEstado().equals("approved")
-            valorRestante= factura.getValor()- abono.getMonto();
+        float totalAbonado = 0;
+        for (String idAbono : factura.getAbonos()) {
+            Abono abono = obtenerAbono(idAbono);
+            if (abono.getMonto() > 0 && abono.getPago().getEstado().equals("approved")) {
+                totalAbonado += abono.getMonto();
+            }
         }
-        factura.setSaldoPendiente(valorRestante);
+
+        float saldoPendiente = factura.getValor() - totalAbonado;
+        factura.setSaldoPendiente(saldoPendiente);
+
+        if (saldoPendiente <= 0) {
+            factura.setEstadoFactura(EstadoFactura.PAGADA);
+        } else if (totalAbonado > 0) {
+            factura.setEstadoFactura(EstadoFactura.PARCIAL);
+        } else {
+            factura.setEstadoFactura(EstadoFactura.PENDIENTE);
+        }
+
         facturaRepo.save(factura);
     }
+
 
     private Pago crearPago(Payment payment) {
         Pago pago = new Pago();
