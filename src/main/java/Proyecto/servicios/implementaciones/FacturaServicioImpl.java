@@ -216,7 +216,7 @@ public class FacturaServicioImpl implements FacturaServicio {
         float totalAbonado = 0;
         for (String idAbono : factura.getAbonos()) {
             Abono abono = obtenerAbono(idAbono);
-            if (abono.getMonto() > 0 && abono.getPago().getEstado().equals("approved")) {
+            if (abono.getMonto() > 0) {
                 totalAbonado += abono.getMonto();
             }
         }
