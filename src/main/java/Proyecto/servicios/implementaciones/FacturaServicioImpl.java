@@ -77,23 +77,30 @@ public class FacturaServicioImpl implements FacturaServicio {
     }
 
     @Override
-    public void agregarAbono(AgregarAbonoDTO agregarAbonoDTO) throws Exception {
-        Factura factura= getFacturaById(agregarAbonoDTO.idFactura());
-        if(factura.getSaldoPendiente()>agregarAbonoDTO.monto()){
+    public String agregarAbono(AgregarAbonoDTO agregarAbonoDTO) throws Exception {
+        Factura factura = getFacturaById(agregarAbonoDTO.idFactura());
+
+        if (factura.getSaldoPendiente() < agregarAbonoDTO.monto()) {
             throw new Exception("El valor a pagar excede el valor pendiente de la factura");
         }
-        Abono abono= new Abono();
+
+        Abono abono = new Abono();
         abono.setMonto(agregarAbonoDTO.monto());
         abono.setFecha(LocalDateTime.now());
-        abonoRepo.save(abono);
-        if(factura.getAbonos().isEmpty()){
+        Abono abonoGuardado = abonoRepo.save(abono);
+        Pago pago= new Pago();
+        abono.setPago(pago);
+
+        if (factura.getAbonos().isEmpty()) {
             factura.setEstadoFactura(EstadoFactura.PARCIAL);
         }
 
-        factura.getAbonos().add(abono.getId());
+        factura.getAbonos().add(abonoGuardado.getId());
         facturaRepo.save(factura);
 
         actualizarValorCaso(factura.getIdFactura());
+
+        return abonoGuardado.getId();
     }
 
     @Override
@@ -155,7 +162,7 @@ public class FacturaServicioImpl implements FacturaServicio {
                 .backUrls(backUrls)
                 .items(itemsPasarela)
                 .metadata(Map.of("id_abono", abono.getId()))
-                .notificationUrl("https://f46f-191-106-134-251.ngrok-free.app/api/factura/mercadopago/notificacion")
+                .notificationUrl("https://firmaabogado-back-1.onrender.com/api/factura/mercadopago/notificacion")
                 .build();
         PreferenceClient client = new PreferenceClient();
         Preference preference = client.create(preferenceRequest);

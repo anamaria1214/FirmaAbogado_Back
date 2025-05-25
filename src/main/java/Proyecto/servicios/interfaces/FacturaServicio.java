@@ -16,7 +16,7 @@ public interface FacturaServicio {
 
     void crearFactura(CrearFacturaDTO crearFacturaDTO) throws Exception;
     void actualizarFactura(ActualizarFacturaDTO actualizarFacturaDTO) throws Exception;
-    void agregarAbono(AgregarAbonoDTO agregarAbonoDTO) throws Exception;
+    String agregarAbono(AgregarAbonoDTO agregarAbonoDTO) throws Exception;
     Factura getFacturaByCaso(String idCaso) throws Exception;
     List<Abono> getAbonosByFactura(String idFactura) throws Exception;
     Factura getFacturaById(String idFactura) throws Exception;

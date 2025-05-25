@@ -53,8 +53,8 @@ public class FacturaController {
     }
     @PostMapping("/agregarAbono")
     public ResponseEntity<MensajeDTO<String>> agregarAbono(@RequestBody AgregarAbonoDTO agregarAbonoDTO) throws Exception {
-        facturaServicio.agregarAbono(agregarAbonoDTO);
-        return ResponseEntity.ok(new MensajeDTO<>(false,"Abono agregado correctamente"));
+        String idAbono= facturaServicio.agregarAbono(agregarAbonoDTO);
+        return ResponseEntity.ok(new MensajeDTO<>(false,idAbono));
     }
 
     @PostMapping("/realizarPago/{idAbono}")
