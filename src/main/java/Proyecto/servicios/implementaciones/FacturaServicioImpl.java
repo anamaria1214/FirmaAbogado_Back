@@ -87,21 +87,21 @@ public class FacturaServicioImpl implements FacturaServicio {
         Abono abono = new Abono();
         abono.setMonto(agregarAbonoDTO.monto());
         abono.setFecha(LocalDateTime.now());
-        Abono abonoGuardado = abonoRepo.save(abono);
         Pago pago= new Pago();
         pago.setEstado("not approved");
         abono.setPago(pago);
+        abonoRepo.save(abono);
 
         if (factura.getAbonos().isEmpty()) {
             factura.setEstadoFactura(EstadoFactura.PARCIAL);
         }
 
-        factura.getAbonos().add(abonoGuardado.getId());
+        factura.getAbonos().add(abono.getId());
         facturaRepo.save(factura);
 
         actualizarValorCaso(factura.getIdFactura());
 
-        return abonoGuardado.getId();
+        return abono.getId();
     }
 
     @Override
