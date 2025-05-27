@@ -89,6 +89,7 @@ public class FacturaServicioImpl implements FacturaServicio {
         abono.setFecha(LocalDateTime.now());
         Abono abonoGuardado = abonoRepo.save(abono);
         Pago pago= new Pago();
+        pago.setEstado("not approved");
         abono.setPago(pago);
 
         if (factura.getAbonos().isEmpty()) {
@@ -216,7 +217,7 @@ public class FacturaServicioImpl implements FacturaServicio {
         float totalAbonado = 0;
         for (String idAbono : factura.getAbonos()) {
             Abono abono = obtenerAbono(idAbono);
-            if (abono.getMonto() > 0) {
+            if (abono.getMonto() > 0 && abono.getPago().getEstado().equals("approved")) {
                 totalAbonado += abono.getMonto();
             }
         }

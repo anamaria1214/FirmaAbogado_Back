@@ -3,10 +3,12 @@ import Proyecto.modelo.documentos.Factura;
 import Proyecto.repositorios.FacturaRepo;
 import Proyecto.servicios.interfaces.EstadisticasServicio;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class EstadisticasServicioImpl implements EstadisticasServicio {
 
     private FacturaRepo facturaRepo;
