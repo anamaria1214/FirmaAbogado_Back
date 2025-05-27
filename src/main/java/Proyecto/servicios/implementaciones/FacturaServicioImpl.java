@@ -39,6 +39,12 @@ public class FacturaServicioImpl implements FacturaServicio {
     }
 
 
+    /**
+     * Crea una nueva factura asociada a un caso.
+     *
+     * @param crearFacturaDTO DTO que contiene los datos necesarios para crear la factura.
+     * @throws Exception si ya existe una factura para el caso especificado.
+     */
     @Override
     public void crearFactura(CrearFacturaDTO crearFacturaDTO) throws Exception {
         Optional<Factura> facturaOptional= facturaRepo.findByCaso(crearFacturaDTO.idCaso());
@@ -59,6 +65,12 @@ public class FacturaServicioImpl implements FacturaServicio {
         facturaRepo.save(factura);
     }
 
+    /**
+     * Actualiza los datos de una factura existente, incluyendo su saldo pendiente.
+     *
+     * @param actualizarFacturaDTO DTO con los nuevos datos de la factura.
+     * @throws Exception si la factura no existe.
+     */
     @Override
     public void actualizarFactura(ActualizarFacturaDTO actualizarFacturaDTO) throws Exception {
         Factura factura = getFacturaById(actualizarFacturaDTO.idFactura());
@@ -76,6 +88,13 @@ public class FacturaServicioImpl implements FacturaServicio {
         facturaRepo.save(factura);
     }
 
+    /**
+     * Agrega un nuevo abono a una factura existente, actualizando su estado y registrando el abono.
+     *
+     * @param agregarAbonoDTO DTO con la información del abono.
+     * @return ID del abono creado.
+     * @throws Exception si el abono excede el saldo pendiente o si la factura no existe.
+     */
     @Override
     public String agregarAbono(AgregarAbonoDTO agregarAbonoDTO) throws Exception {
         Factura factura = getFacturaById(agregarAbonoDTO.idFactura());
@@ -104,6 +123,13 @@ public class FacturaServicioImpl implements FacturaServicio {
         return abono.getId();
     }
 
+    /**
+     * Obtiene una factura asociada a un caso específico.
+     *
+     * @param idCaso ID del caso.
+     * @return La factura correspondiente al caso.
+     * @throws Exception si no existe una factura para ese caso.
+     */
     @Override
     public Factura getFacturaByCaso(String idCaso) throws Exception {
         Optional<Factura> facturaOptional = facturaRepo.findByCaso(idCaso);
@@ -115,6 +141,13 @@ public class FacturaServicioImpl implements FacturaServicio {
         return factura;
     }
 
+    /**
+     * Obtiene la lista de abonos asociados a una factura.
+     *
+     * @param idFactura ID de la factura.
+     * @return Lista de abonos correspondientes a la factura.
+     * @throws Exception si la factura o algún abono no existen.
+     */
     @Override
     public List<Abono> getAbonosByFactura(String idFactura) throws Exception {
         Factura factura= getFacturaById(idFactura);
@@ -129,6 +162,13 @@ public class FacturaServicioImpl implements FacturaServicio {
         return abonos;
     }
 
+    /**
+     * Obtiene una factura a partir de su ID.
+     *
+     * @param idFactura ID de la factura.
+     * @return Factura correspondiente al ID.
+     * @throws Exception si la factura no existe.
+     */
     @Override
     public Factura getFacturaById(String idFactura) throws Exception {
         Optional<Factura> facturaOptional = facturaRepo.findById(idFactura);
@@ -139,7 +179,13 @@ public class FacturaServicioImpl implements FacturaServicio {
         factura = facturaOptional.get();
         return factura;
     }
-
+    /**
+     * Genera una preferencia de pago en MercadoPago para un abono.
+     *
+     * @param idAbono ID del abono a pagar.
+     * @return Objeto {@link Preference} generado por MercadoPago.
+     * @throws Exception si el abono no existe.
+     */
     @Override
     public Preference realizarPago(String idAbono) throws Exception {
         Abono abono = obtenerAbono(idAbono);
@@ -174,6 +220,11 @@ public class FacturaServicioImpl implements FacturaServicio {
         return preference;
     }
 
+    /**
+     * Procesa la notificación enviada por MercadoPago al servidor cuando se actualiza el estado de un pago.
+     *
+     * @param request Mapa con los datos de la notificación.
+     */
     @Override
     public void recibirNotificacionMercadoPago(Map<String, Object> request) {
         try {
@@ -201,6 +252,13 @@ public class FacturaServicioImpl implements FacturaServicio {
 
     }
 
+    /**
+     * Obtiene un abono por su ID.
+     *
+     * @param idAbono ID del abono.
+     * @return Abono correspondiente al ID.
+     * @throws Exception si el abono no existe.
+     */
     @Override
     public Abono obtenerAbono(String idAbono) throws Exception {
         Optional<Abono> abono= abonoRepo.findById(idAbono);
@@ -210,6 +268,12 @@ public class FacturaServicioImpl implements FacturaServicio {
         return abono.get();
     }
 
+    /**
+     * Recalcula el saldo pendiente de una factura en función de sus abonos aprobados.
+     *
+     * @param idFactura ID de la factura.
+     * @throws Exception si la factura o algún abono no existen.
+     */
     @Override
     public void actualizarValorCaso(String idFactura) throws Exception {
         Factura factura = getFacturaById(idFactura);
@@ -236,7 +300,12 @@ public class FacturaServicioImpl implements FacturaServicio {
         facturaRepo.save(factura);
     }
 
-
+    /**
+     * Crea un objeto {@link Pago} a partir de un objeto {@link Payment} de MercadoPago.
+     *
+     * @param payment Objeto de pago recibido desde MercadoPago.
+     * @return Objeto {@link Pago} creado.
+     */
     private Pago crearPago(Payment payment) {
         Pago pago = new Pago();
         pago.setId(payment.getId().toString());
